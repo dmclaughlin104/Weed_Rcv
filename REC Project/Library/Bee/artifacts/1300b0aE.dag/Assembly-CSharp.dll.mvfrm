@@ -3,6 +3,20 @@ Unity
 Connect
 Share
 Editor
+ActionBasedControllerEditor
+UnityEngine
+XR
+Interaction
+Toolkit
+XRBaseControllerEditor
+XRControllerEditor
+XRControllerRecorderEditor
+XRControllerRecordingEditor
+XRRigEditor
+PackageManagerEditorHelper
+Utilities
+InputHelpers
+
 AssetModificationProcessor
 
 Sysroot
