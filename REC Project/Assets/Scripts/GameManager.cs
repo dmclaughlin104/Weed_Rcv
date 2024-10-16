@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         powerUps = GameObject.FindGameObjectsWithTag("PowerUp");
 
         //updating UI and health variables
-        UpdateWaveText(spawnManagerScript.nextWave);
+        //UpdateWaveText(spawnManagerScript.nextWave);
         HealthManager(playerControllerScript.healthCount);
 
         //activating UI gameplay timer
@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
         //telling spawn manager that game is active
         spawnManagerScript.gameActive = true;
 
+        /*
         //set grave gameObject inactive
         playerControllerScript.grave.gameObject.SetActive(false);
 
@@ -86,6 +87,7 @@ public class GameManager : MonoBehaviour
         minuteCount = 0;
         secondsCount = 0;
 
+        
         //activating & deactivating UI elements
         healthText.gameObject.SetActive(true);
         waveText.gameObject.SetActive(true);
@@ -96,10 +98,11 @@ public class GameManager : MonoBehaviour
         gameOverTint.gameObject.SetActive(false);
         titleScreen.gameObject.SetActive(false);
         startButton.gameObject.SetActive(false);
-
+        */
 
     }
 
+    /*
     //method to call the game over screen and reset elements for next play
     void GameOverScreen()
     {
@@ -145,6 +148,8 @@ public class GameManager : MonoBehaviour
             Destroy(powerUp);
         }
     }
+    */
+    /*
 
     //stipulating a brief pause on Game Over before restart button appears
     IEnumerator RestartButtonPause()
@@ -152,8 +157,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3.5f);
         startButton.gameObject.SetActive(true);
     }
+    */
 
-
+    
     //reset game elements for next play;
     void ResetForNextPlay()
     {
@@ -161,12 +167,13 @@ public class GameManager : MonoBehaviour
         spawnManagerScript.ResetNextWave();
     }
 
-
+    /*
     //method to keep wave text up to date
     public void UpdateWaveText(int pWaveNo)
     {
         waveText.text = "Wave: " + pWaveNo;
     }
+    */
 
     //method to keep health text up to date
     public void HealthManager(int pHealthNo)
@@ -177,7 +184,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            GameOverScreen();
+            //GameOverScreen();
             ResetForNextPlay();
             this.playerAnim.SetBool("isDead", true);
         }

@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
 
         //setting value for flame-thrower slider
-        flameThrowerSlider.maxValue = flamethrowerTime;
+        //flameThrowerSlider.maxValue = flamethrowerTime;
 
     }
 
@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
         //N.B this doesn't work as expected inside other methods
         //needs to be constantly called in Update() to give gradual decreasing effect
 
+        /*
         if (hasPowerUp == true)
         {
             FlameThrowerUIActive();
@@ -72,14 +73,18 @@ public class PlayerController : MonoBehaviour
         {
             FlameThrowerUINotActive();
         }
+        */
 
+        /*
         //if game is live, player can move
         if (spawnManagerScript.gameActive)
         {
             MovementControls();
             PlayerBoundaryControls();
         }
+        */
 
+        /*
         //detect if player is attacking/slashing, if appropriate
         if (Input.GetKeyDown(KeyCode.Space) && !isSlashing && !hasPowerUp && spawnManagerScript.gameActive)
         {
@@ -91,6 +96,7 @@ public class PlayerController : MonoBehaviour
             SlashEffect();
             StartCoroutine(SlashEndCountdown());
         }
+        */
 
 
     }
@@ -210,11 +216,13 @@ public class PlayerController : MonoBehaviour
         flamethrowerText.gameObject.SetActive(true);
     }
 
+    /*
     void FlameThrowerUINotActive()
     {
         flamethrowerBar.gameObject.SetActive(false);
         flamethrowerText.gameObject.SetActive(false);
     }
+    */
 
 
     //method for depleting health

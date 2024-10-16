@@ -12,7 +12,9 @@ public class SpawnManager : MonoBehaviour
     public int enemyCount;
     public int nextWave;
     private float playerSafetyZone = 2f;
-    public bool gameActive = false;
+
+    //this just to get game started during early phase
+    public bool gameActive = true;
 
 
     // Update is called once per frame
