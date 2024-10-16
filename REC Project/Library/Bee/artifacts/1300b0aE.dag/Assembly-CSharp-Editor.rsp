@@ -385,6 +385,8 @@
 -r:"Library/Bee/artifacts/1300b0aE.dag/Unity.XR.Interaction.Toolkit.Samples.StarterAssets.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/Unity.XR.Management.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/Unity.XR.Management.ref.dll"
+-r:"Library/Bee/artifacts/1300b0aE.dag/Unity.XR.Oculus.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1300b0aE.dag/Unity.XR.Oculus.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.SpatialTracking.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.TestRunner.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.UI.ref.dll"

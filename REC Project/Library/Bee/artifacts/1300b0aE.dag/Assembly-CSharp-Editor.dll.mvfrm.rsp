@@ -34,6 +34,8 @@ Library\Bee\artifacts\mvdfrm\Unity.XR.Interaction.Toolkit.Samples.StarterAssets.
 Library\Bee\artifacts\mvdfrm\Unity.XR.Interaction.Toolkit.ref.dll_3BC3806C28E64DC2.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.XR.Management.Editor.ref.dll_63D1283B59813AF8.mvfrm
 Library\Bee\artifacts\mvdfrm\Unity.XR.Management.ref.dll_B8AA0C3955A88449.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.XR.Oculus.Editor.ref.dll_7B34F9F5328E4DD2.mvfrm
+Library\Bee\artifacts\mvdfrm\Unity.XR.Oculus.ref.dll_F7E0CC0D68418BCF.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEditor.SpatialTracking.ref.dll_4005BB3EAE0C01EA.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEditor.TestRunner.ref.dll_A805A84D9B0C22D9.mvfrm
 Library\Bee\artifacts\mvdfrm\UnityEditor.UI.ref.dll_0174E068A5FA251B.mvfrm
