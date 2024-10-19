@@ -28,7 +28,6 @@ public class SpawnManager : MonoBehaviour
         {
             StartGameplay();
         }
-
     }
 
     //method to start main gameplay spawning loop

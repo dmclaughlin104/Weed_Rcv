@@ -36,11 +36,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //finding scripts
-        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerControllerScript = GameObject.Find("Enemy Target Point").GetComponent<PlayerController>();
         spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
 
+        StartGame();
         //adding listener to button
-        startButton.onClick.AddListener(StartGame);
+        //startButton.onClick.AddListener(StartGame);
     }
 
     // Update is called once per frame
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
 
         //updating UI and health variables
         //UpdateWaveText(spawnManagerScript.nextWave);
-        HealthManager(playerControllerScript.healthCount);
+        //HealthManager(playerControllerScript.healthCount);
 
         //activating UI gameplay timer
         if (spawnManagerScript.gameActive)

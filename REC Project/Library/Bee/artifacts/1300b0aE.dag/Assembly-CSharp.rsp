@@ -380,6 +380,7 @@
 "Assets/Scripts/CameraMovement.cs"
 "Assets/Scripts/DamageFlash.cs"
 "Assets/Scripts/EnemyController.cs"
+"Assets/Scripts/EnemyTargetController.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/MenuUIHandler.cs"
 "Assets/Scripts/ObjectRotate.cs"

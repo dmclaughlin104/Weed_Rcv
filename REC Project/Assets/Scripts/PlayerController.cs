@@ -75,16 +75,16 @@ public class PlayerController : MonoBehaviour
         }
         */
 
-        /*
+        
         //if game is live, player can move
         if (spawnManagerScript.gameActive)
         {
-            MovementControls();
+            //MovementControls();
             PlayerBoundaryControls();
         }
-        */
+        
 
-        /*
+        
         //detect if player is attacking/slashing, if appropriate
         if (Input.GetKeyDown(KeyCode.Space) && !isSlashing && !hasPowerUp && spawnManagerScript.gameActive)
         {
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
             SlashEffect();
             StartCoroutine(SlashEndCountdown());
         }
-        */
+        
 
 
     }
