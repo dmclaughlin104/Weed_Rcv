@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour
         }
 
         //check distance to player to trigger jump animation
-        CheckDistanceToPlayer();
+        //CheckDistanceToPlayer();
 
 
     }
@@ -88,7 +88,7 @@ public class EnemyController : MonoBehaviour
         if (other.CompareTag("Slash"))
         {
             //make blood effect start, after brief delay
-            StartCoroutine(bloodDelay());
+            //StartCoroutine(bloodDelay());
             
             //trigger enemy death animation
             EnemyDeath();

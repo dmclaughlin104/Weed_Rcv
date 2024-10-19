@@ -235,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAnim: {fileID: 0}
   smokeParticle: {fileID: 4979966991611811020}
-  weedBloodParticle: {fileID: 3862280500430003056}
+  weedBloodParticle: {fileID: 0}
   enemyBodyParts:
   - {fileID: 2558616442967506648}
   - {fileID: 8587158423017502973}
@@ -245,7 +245,7 @@ MonoBehaviour:
   - {fileID: 4353406051294188012}
   - {fileID: 5939394452629798328}
   - {fileID: 8128998400437044824}
-  playerTag: Player
+  spawnManagerScript: {fileID: 0}
 --- !u!1 &2558616442967506648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6733177361254619370, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
@@ -512,11 +512,6 @@ PrefabInstance:
 --- !u!4 &3860258989125104882 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4396671266920006, guid: 5656e7ea1f1a75d4c895547ec2b824b3, type: 3}
-  m_PrefabInstance: {fileID: 3863520749339828916}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3862280500430003056 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1240250018707908, guid: 5656e7ea1f1a75d4c895547ec2b824b3, type: 3}
   m_PrefabInstance: {fileID: 3863520749339828916}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4978979004891668864

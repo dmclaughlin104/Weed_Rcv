@@ -6,7 +6,7 @@ public class EnemyTargetController : MonoBehaviour
 {
 
     public GameObject player;
-    private float fixedHeight = 0.65f;
+    private float fixedHeight = 0.6f;
 
     // Start is called before the first frame update
     void Start()
