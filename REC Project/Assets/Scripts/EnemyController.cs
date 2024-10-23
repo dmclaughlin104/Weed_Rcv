@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,11 +56,6 @@ public class EnemyController : MonoBehaviour
         {
             this.enemyAnim.SetBool("playerDead", true);
         }
-
-        //check distance to player to trigger jump animation
-        //CheckDistanceToPlayer();
-
-
     }
 
     //method to make enemy look torward player
@@ -80,7 +76,6 @@ public class EnemyController : MonoBehaviour
         transform.Translate(moveDirection * movementSpeed * Time.deltaTime, Space.World);
     }
 
-
     //manage triggers
     private void OnTriggerEnter(Collider other)
     {
@@ -88,31 +83,34 @@ public class EnemyController : MonoBehaviour
         if (other.CompareTag("Slash"))
         {
             //make blood effect start, after brief delay
-            //StartCoroutine(bloodDelay());
-            
-            //trigger enemy death animation
+            StartCoroutine(bloodDelay());
+
+            //trigger enemy death
             EnemyDeath();
 
             //push enemy back on slash attack
             enemyRB.AddForce(-moveDirection * attackForce, ForceMode.Impulse);
 
-            //destroy gameObject after 2 seconds
-            Destroy(gameObject, 2);
+            //deactivate enemy instead of destroying it
+            StartCoroutine(ResetEnemyRB(1.9f));
+            StartCoroutine(DeactivateEnemy(2f));
+                        
         }
         //if enemy hit by flames
         else if (other.CompareTag("Flames"))
         {
             //start smoke effect after pause
             StartCoroutine(SmokeDelay());
-            
-            //trigger enemy death animation
+
+            //trigger enemy death
             EnemyDeath();
 
             //change weed material colour
             ChangeWeedMaterialBlack();
 
-            //destroy gameObject after 4 seconds - longer time to appreciate smoke effect
-            Destroy(gameObject, 4f);
+            //deactivate enemy after a longer time (for smoke effect)
+            StartCoroutine(DeactivateEnemy(4f));
+            
         }
         //tigger bite animation if enemy collides with player
         else if (other.CompareTag("Player"))
@@ -120,7 +118,6 @@ public class EnemyController : MonoBehaviour
             this.enemyAnim.SetBool("bitePlayer", true);
             StartCoroutine(BiteCoolDown());
         }
-
     }
 
     //trigger jump animation if enemy gets within a certain distance of player
@@ -132,13 +129,8 @@ public class EnemyController : MonoBehaviour
         {
             enemyAnim.SetBool("inZone", true);
             isJumping = true;
-
-            //test using force for jump
-            //enemyRB.AddForce(Vector3.up * jumpForce * Time.deltaTime, ForceMode.Impulse);
-
             StartCoroutine(JumpingCoolDown());
         }
-        //resetting trigger for animation to false when the player gets out of range
         else
         {
             enemyAnim.SetBool("inZone", false);
@@ -170,13 +162,10 @@ public class EnemyController : MonoBehaviour
     //method for changing key parts of enemy to black
     void ChangeWeedMaterialBlack()
     {
-
         foreach (GameObject bodyPart in enemyBodyParts)
         {
             SkinnedMeshRenderer bodyPartMesh = bodyPart.GetComponent<SkinnedMeshRenderer>();
-
             bodyPartMesh.material.color = Color.black;
-
         }
     }
 
@@ -194,13 +183,47 @@ public class EnemyController : MonoBehaviour
         weedBloodParticle.SetActive(true);
     }
 
-    //waits until enemy is settled on ground it gets swallowed up 
-    //not currently used
-    public IEnumerator EnemySinkDelay()
+    // Deactivate enemy after delay and return to object pool
+    IEnumerator DeactivateEnemy(float delay)
     {
-        yield return new WaitForSeconds(1.5f);
-        transform.Translate(Vector3.down * 15f * Time.deltaTime);
+        yield return new WaitForSeconds(delay);
+        spawnManagerScript.DeactivateEnemy(gameObject);
+        //gameObject.SetActive(false); // Deactivate instead of destroying
+        spawnManagerScript.enemyCount--;
+        ResetEnemy();
     }
 
+    IEnumerator ResetEnemyRB(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        //removing any RB physics effects from previous interactions
+        enemyRB.velocity = new Vector3(0, 0, 0);
+        enemyRB.angularVelocity = new Vector3(0, 0, 0);
 
+    }
+
+    // Reset the enemy's state for reactivation from the pool
+    void ResetEnemy()
+    {
+        isDead = false;
+        this.enemyAnim.SetBool("isDead", false);
+        this.enemyAnim.SetBool("playerDead", false);
+        this.enemyAnim.SetBool("bitePlayer", false);
+        this.enemyAnim.SetBool("inZone", false);
+        transform.gameObject.tag = "Weed Enemy"; // Reset the tag
+        weedBloodParticle.SetActive(false);
+        smokeParticle.SetActive(false);
+        ChangeWeedMaterialOriginal(); // Reset material color if changed
+
+    }
+
+    // Reset the weed material color (optional method to restore original color)
+    void ChangeWeedMaterialOriginal()
+    {
+        foreach (GameObject bodyPart in enemyBodyParts)
+        {
+            SkinnedMeshRenderer bodyPartMesh = bodyPart.GetComponent<SkinnedMeshRenderer>();
+            bodyPartMesh.material.color = Color.green; // Assuming original color is green
+        }
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    //variables
+    // Variables
     public GameObject player;
     public GameObject enemyPrefab;
     public GameObject powerUpPrefab;
@@ -13,82 +13,138 @@ public class SpawnManager : MonoBehaviour
     public int nextWave;
     private float playerSafetyZone = 2f;
 
-    //this just to get game started during early phase
+    // Object pool variables
+    public int initialPoolSize = 30; // Start with 30 enemies in the pool
+    private List<GameObject> enemyPool; // Pool for enemies
+    public List<GameObject> activeEnemies; // List to track currently active enemies
+
+    // Game status
     public bool gameActive = true;
 
+    void Start()
+    {
+        // Initialize the enemy pool
+        enemyPool = new List<GameObject>();
+        activeEnemies = new List<GameObject>();
 
-    // Update is called once per frame
+        // Prepopulate the pool with inactive enemy objects
+        for (int i = 0; i < initialPoolSize; i++)
+        {
+            GameObject enemy = Instantiate(enemyPrefab);
+            enemy.SetActive(false); // Initially set the enemy to inactive
+            enemyPool.Add(enemy);
+        }
+    }
+
     void Update()
     {
-        //setting enemy count - N.B. using the scripts applied, not the tag
-        enemyCount = FindObjectsOfType<EnemyController>().Length;
+        // Update the enemy count based on the number of active enemies
+        enemyCount = activeEnemies.Count;
 
-        //if the game is active, start gameplay spawning
-        if (gameActive == true)
+        // If the game is active, start gameplay spawning
+        if (gameActive)
         {
             StartGameplay();
         }
     }
 
-    //method to start main gameplay spawning loop
+    // Method to start the main gameplay spawning loop
     public void StartGameplay()
     {
-        //if all enemies are defeated, spawn more
-        if ((enemyCount == 0))
+        // If all enemies are defeated, spawn more
+        if (enemyCount == 0)
         {
-            nextWave++;//increase number in wave
+            nextWave++; // Increase the number in the wave
             SpawnEnemyWave(nextWave);
 
-            //spawn a power up every even-numbered wave (over 4)
-            if (nextWave >= 4 && ((nextWave % 2) == 0))
+            // Spawn a power-up every even-numbered wave (over 4)
+            if (nextWave >= 4 && (nextWave % 2) == 0)
             {
                 SpawnPowerUp();
-            }//if
-        }//if
-    }
-
-    //spawn an enemy wave
-    void SpawnEnemyWave(int pWaveNumber)
-    {
-        //spawn a number of enemies corresponding with the wave number
-        for (int count = 0; count < pWaveNumber; count++)
-        {
-            Instantiate(enemyPrefab, GenerateSpawnPos(0), enemyPrefab.transform.rotation);
+            }
         }
     }
 
-    //method to spawn power up
+    // Spawn an enemy wave
+    void SpawnEnemyWave(int waveNumber)
+    {
+        // Spawn a number of enemies corresponding with the wave number
+        for (int count = 0; count < waveNumber; count++)
+        {
+            SpawnEnemy();
+            enemyCount++;
+        }
+    }
+
+    // Method to spawn an enemy using object pooling
+    void SpawnEnemy()
+    {
+        // Try to get an inactive enemy from the pool
+        GameObject enemy = GetPooledEnemy();
+
+        if (enemy != null)
+        {
+            // Set the enemy active and move it to the spawn position
+            enemy.transform.position = GenerateSpawnPos(0);
+            enemy.SetActive(true);
+            activeEnemies.Add(enemy); // Add to the list of active enemies
+        }
+        else
+        {
+            // If no enemies are available, instantiate a new one and add it to the pool
+            GameObject newEnemy = Instantiate(enemyPrefab, GenerateSpawnPos(0), enemyPrefab.transform.rotation);
+            enemyPool.Add(newEnemy); // Add it to the pool
+            activeEnemies.Add(newEnemy); // Add to active list
+        }
+    }
+
+    // Method to get an inactive enemy from the pool
+    GameObject GetPooledEnemy()
+    {
+        foreach (GameObject enemy in enemyPool)
+        {
+            if (!enemy.activeInHierarchy)
+            {
+                return enemy; // Return the first inactive enemy found
+            }
+        }
+        return null; // Return null if no inactive enemies are available
+    }
+
+    // Method to spawn a power-up
     public void SpawnPowerUp()
     {
         Instantiate(powerUpPrefab, GenerateSpawnPos(1.0f), powerUpPrefab.transform.rotation);
     }
 
-
-    //method to generate a new random spawn position
-    //N.B. float parameter helps differ between enemy & power-up spawn height on y Axis
+    // Method to generate a new random spawn position
     public Vector3 GenerateSpawnPos(float objectYPosition)
     {
-        //variables
         float spawnPosX = Random.Range(-spawnRange, spawnRange);
         float spawnPosZ = Random.Range(-spawnRange, spawnRange);
         Vector3 spawnPos = new Vector3(spawnPosX, objectYPosition, spawnPosZ);
 
-        //ensures spawn position isn't too close to player position by checking the distance
+        // Ensure the spawn position isn't too close to the player position
         while (Vector3.Distance(spawnPos, player.transform.position) < playerSafetyZone)
         {
             spawnPosX = Random.Range(-spawnRange, spawnRange);
             spawnPosZ = Random.Range(-spawnRange, spawnRange);
             spawnPos = new Vector3(spawnPosX, objectYPosition, spawnPosZ);
-            //Debug.Log(Vector3.Distance(spawnPos, player.transform.position));
         }
 
         return spawnPos;
     }
 
-    //method to reset next wave back to zero - called in GameManager script
+    // Method to deactivate an enemy and return it to the pool
+    public void DeactivateEnemy(GameObject enemy)
+    {
+        enemy.SetActive(false);
+        activeEnemies.Remove(enemy);
+    }
+
+    // Method to reset next wave back to zero - called in GameManager script
     public void ResetNextWave()
     {
         nextWave = 0;
     }
-
 }
