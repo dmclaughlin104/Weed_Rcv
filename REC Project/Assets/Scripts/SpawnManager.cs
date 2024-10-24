@@ -11,18 +11,19 @@ public class SpawnManager : MonoBehaviour
     private float spawnRange = 7;
     public int enemyCount;
     public int nextWave;
-    private float playerSafetyZone = 2f;
+    private float playerSafetyZone = 3f;
 
     // Object pool variables
-    public int initialPoolSize = 30; // Start with 30 enemies in the pool
+    public int initialPoolSize = 15; // Start with 30 enemies in the pool
     private List<GameObject> enemyPool; // Pool for enemies
     public List<GameObject> activeEnemies; // List to track currently active enemies
 
     // Game status
-    public bool gameActive = true;
+    public bool gameActive = false;
 
     void Start()
     {
+        
         // Initialize the enemy pool
         enemyPool = new List<GameObject>();
         activeEnemies = new List<GameObject>();
@@ -140,6 +141,26 @@ public class SpawnManager : MonoBehaviour
     {
         enemy.SetActive(false);
         activeEnemies.Remove(enemy);
+    }
+
+    public void DeactivateAllEnemies()
+    {
+        // Loop through all active enemies in the activeEnemies list
+        for (int i = activeEnemies.Count - 1; i >= 0; i--)
+        {
+            // Get the enemy from the list
+            GameObject enemy = activeEnemies[i];
+
+            // Get the EnemyController component attached to the enemy
+            EnemyController enemyController = enemy.GetComponent<EnemyController>();
+
+            // Deactivate the enemy using the DeactivateEnemy method
+            DeactivateEnemy(enemy);
+
+            enemyController.ResetEnemyRB();
+            enemyController.ResetEnemy();
+
+        }
     }
 
     // Method to reset next wave back to zero - called in GameManager script

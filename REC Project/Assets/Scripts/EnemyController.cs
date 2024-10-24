@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     public Animator enemyAnim;
     private Rigidbody enemyRB;
     public GameObject smokeParticle;
-    public GameObject weedBloodParticle;
+    //public GameObject weedBloodParticle;
     public GameObject[] enemyBodyParts;
     public SpawnManager spawnManagerScript;
     private Transform player;
@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
     private float attackForce = 1.5f;
     Vector3 moveDirection;
     private bool isJumping = false;
+    public bool gameActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //controlling enemy movement, so long as enemy isn't dead
         if (!isDead && spawnManagerScript.gameActive)
         {
@@ -49,6 +51,8 @@ public class EnemyController : MonoBehaviour
 
             // Move toward the player
             MoveTowardsPlayer();
+
+
         }
 
         //trigger roar animation when player is defeated
@@ -56,6 +60,14 @@ public class EnemyController : MonoBehaviour
         {
             this.enemyAnim.SetBool("playerDead", true);
         }
+
+        if (spawnManagerScript.gameActive == false)
+        {
+            spawnManagerScript.DeactivateEnemy(gameObject);
+            ResetEnemyRB();
+            ResetEnemy();
+        }
+
     }
 
     //method to make enemy look torward player
@@ -83,7 +95,7 @@ public class EnemyController : MonoBehaviour
         if (other.CompareTag("Slash"))
         {
             //make blood effect start, after brief delay
-            StartCoroutine(bloodDelay());
+            //StartCoroutine(bloodDelay());
 
             //trigger enemy death
             EnemyDeath();
@@ -92,7 +104,7 @@ public class EnemyController : MonoBehaviour
             enemyRB.AddForce(-moveDirection * attackForce, ForceMode.Impulse);
 
             //deactivate enemy instead of destroying it
-            StartCoroutine(ResetEnemyRB(1.9f));
+            StartCoroutine(ResetEnemyRB(1.5f));
             StartCoroutine(DeactivateEnemy(2f));
                         
         }
@@ -175,22 +187,29 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(0.9f);
         smokeParticle.SetActive(true);
     }
-
+    /*
     //brief delay before blood effect starts
     public IEnumerator bloodDelay()
     {
         yield return new WaitForSeconds(0.25f);
         weedBloodParticle.SetActive(true);
     }
+    */
 
     // Deactivate enemy after delay and return to object pool
     IEnumerator DeactivateEnemy(float delay)
     {
         yield return new WaitForSeconds(delay);
         spawnManagerScript.DeactivateEnemy(gameObject);
-        //gameObject.SetActive(false); // Deactivate instead of destroying
         spawnManagerScript.enemyCount--;
         ResetEnemy();
+    }
+
+    
+    public void ResetEnemyRB()
+    {
+        enemyRB.velocity = new Vector3(0, 0, 0);
+        enemyRB.angularVelocity = new Vector3(0, 0, 0);
     }
 
     IEnumerator ResetEnemyRB(float delay)
@@ -203,7 +222,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // Reset the enemy's state for reactivation from the pool
-    void ResetEnemy()
+    public void ResetEnemy()
     {
         isDead = false;
         this.enemyAnim.SetBool("isDead", false);
@@ -211,9 +230,9 @@ public class EnemyController : MonoBehaviour
         this.enemyAnim.SetBool("bitePlayer", false);
         this.enemyAnim.SetBool("inZone", false);
         transform.gameObject.tag = "Weed Enemy"; // Reset the tag
-        weedBloodParticle.SetActive(false);
+        //weedBloodParticle.SetActive(false);
         smokeParticle.SetActive(false);
-        ChangeWeedMaterialOriginal(); // Reset material color if changed
+        //ChangeWeedMaterialOriginal(); // Reset material color if changed
 
     }
 

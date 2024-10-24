@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     // UI elements
     [SerializeField] TextMeshProUGUI titleScreen;
     [SerializeField] Button startButton;
+    [SerializeField] Button stopButton;
     [SerializeField] TextMeshProUGUI waveText;
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI gameOver1;
@@ -34,14 +35,19 @@ public class GameManager : MonoBehaviour
         playerControllerScript = GameObject.Find("Enemy Target Point").GetComponent<PlayerController>();
         spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
 
-        StartGame();
+        //adding listener to button
+        startButton.onClick.AddListener(StartGame);
+
+        //adding listener to button
+        stopButton.onClick.AddListener(StopGame);
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        KillWaveDebug();
+        //KillWaveDebug();
         // Activating UI gameplay timer
         if (spawnManagerScript.gameActive)
         {
@@ -49,22 +55,49 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     // Method to start game...
     void StartGame()
     {
+        //debug test
+        Debug.Log("Button Clicked!");
+
         // Telling spawn manager that game is active
         spawnManagerScript.gameActive = true;
 
-        // Additional UI and player state setup code (e.g., resetting health, UI elements, etc.)
+
         /*
-        playerControllerScript.grave.gameObject.SetActive(false);
-        playerAnim.SetBool("isDead", false);
+        // Additional UI and player state setup code (e.g., resetting health, UI elements, etc.)
+        
+        //playerControllerScript.grave.gameObject.SetActive(false);
+        //playerAnim.SetBool("isDead", false);
         minuteCount = 0;
         secondsCount = 0;
         healthText.gameObject.SetActive(true);
         waveText.gameObject.SetActive(true);
         timerText.gameObject.SetActive(true);
+
         */
+        //UI
+        startButton.gameObject.SetActive(false);
+        stopButton.gameObject.SetActive(true);
+
+    }
+
+    void StopGame()
+    {
+        //debug test
+        Debug.Log("Button Clicked!");
+
+        //UI
+        stopButton.gameObject.SetActive(false);
+        startButton.gameObject.SetActive(true);
+
+        spawnManagerScript.gameActive = false;
+        ResetForNextPlay();
+        //spawnManagerScript.DeactivateAllEnemies();
+
+
     }
 
     // Method to call the game over screen and reset elements for the next play
@@ -74,7 +107,7 @@ public class GameManager : MonoBehaviour
         spawnManagerScript.gameActive = false;
 
         // Ensuring player stops running during Game Over screen
-        playerAnim.SetFloat("vertical", 0);
+        //playerAnim.SetFloat("vertical", 0);
 
         // Assign final wave number
         int gameOverWaveNumber = spawnManagerScript.nextWave;
