@@ -9,7 +9,7 @@ using Unity.VisualScripting;
 public class GameManager : MonoBehaviour
 {
     // Player animator
-    [SerializeField] Animator playerAnim;
+    //[SerializeField] Animator playerAnim;
 
     // UI elements
     [SerializeField] TextMeshProUGUI titleScreen;
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     void StartGame()
     {
         //debug test
-        Debug.Log("Button Clicked!");
+        //Debug.Log("Button Clicked!");
 
         // Telling spawn manager that game is active
         spawnManagerScript.gameActive = true;
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     void StopGame()
     {
         //debug test
-        Debug.Log("Button Clicked!");
+        //Debug.Log("Button Clicked!");
 
         //UI
         stopButton.gameObject.SetActive(false);

@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class EnemyTargetController : MonoBehaviour
 {
-
-    public GameObject player;
-    private float fixedHeight = 0.6f;
+    [SerializeField] GameObject player;
+    private float fixedHeight = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +15,11 @@ public class EnemyTargetController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        FollowPlayer();
+    }
+
+    void FollowPlayer()
     {
         // Get the player's position
         Vector3 playerPosition = player.transform.position;

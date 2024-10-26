@@ -11,7 +11,7 @@ public class SpawnManager : MonoBehaviour
     private float spawnRange = 7;
     public int enemyCount;
     public int nextWave;
-    private float playerSafetyZone = 3f;
+    private float playerSafetyZone = 5f;
 
     // Object pool variables
     public int initialPoolSize = 15; // Start with 30 enemies in the pool
@@ -61,7 +61,7 @@ public class SpawnManager : MonoBehaviour
             // Spawn a power-up every even-numbered wave (over 4)
             if (nextWave >= 4 && (nextWave % 2) == 0)
             {
-                SpawnPowerUp();
+                //SpawnPowerUp();
             }
         }
     }
