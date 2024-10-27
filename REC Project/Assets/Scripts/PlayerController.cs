@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     //player animator variable
-    public Animator playerAnim;
+    //public Animator playerAnim;
 
     //game objets, sounds & UI variables
     [SerializeField] GameObject attackObject;
@@ -75,16 +75,17 @@ public class PlayerController : MonoBehaviour
         }
         */
 
-        
+
+        /*
         //if game is live, player can move
         if (spawnManagerScript.gameActive)
         {
-            //MovementControls();
+            MovementControls();
             PlayerBoundaryControls();
         }
-        
+        */
 
-        
+
         //detect if player is attacking/slashing, if appropriate
         if (Input.GetKeyDown(KeyCode.Space) && !isSlashing && !hasPowerUp && spawnManagerScript.gameActive)
         {
@@ -112,9 +113,11 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.forward * forwardInput * forwardSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up * horizontalInput * turnSpeed * Time.deltaTime);
 
+        /*
         //assigning axis values to animation controller
         this.playerAnim.SetFloat("vertical", forwardInput);
         this.playerAnim.SetFloat("horizontal", horizontalInput);
+        */
 
     }
 
@@ -152,7 +155,7 @@ public class PlayerController : MonoBehaviour
         isSlashing = true;
         attackObject.SetActive(true);//make slash object live in scene
         slashParticle.Play();//play particle effect
-        this.playerAnim.SetBool("isSlashing", true);//play animation
+        //this.playerAnim.SetBool("isSlashing", true);//play animation
     }
 
     //ends the slash attack
@@ -160,7 +163,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
         attackObject.SetActive(false);
-        this.playerAnim.SetBool("isSlashing", false);
+        //this.playerAnim.SetBool("isSlashing", false);
         isSlashing = false;
 
     }
@@ -190,7 +193,7 @@ public class PlayerController : MonoBehaviour
         
         flameThrowerSlider.value = flamethrowerTime;//setting UI back to full
         hasPowerUp = true;
-        this.playerAnim.SetBool("isFlamethrowing", true);
+        //this.playerAnim.SetBool("isFlamethrowing", true);
         playerAudio.PlayOneShot(flamethrowerSound);
         StartCoroutine(FlamethrowerCountdown());
     }
@@ -202,7 +205,7 @@ public class PlayerController : MonoBehaviour
         flamesBox.SetActive(false);
         flamesObject.SetActive(false);
         hasPowerUp = false;
-        this.playerAnim.SetBool("isFlamethrowing", false);
+        //this.playerAnim.SetBool("isFlamethrowing", false);
     }
 
     //A flamethrower timer UI countdown

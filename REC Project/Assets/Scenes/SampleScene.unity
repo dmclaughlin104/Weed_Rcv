@@ -480,7 +480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2c16ae51609eb4aa2a674e09d491e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAnim: {fileID: 2012408138}
   attackObject: {fileID: 601322145}
   flamesBox: {fileID: 1261264253}
   flamesObject: {fileID: 1528986035}
@@ -1049,6 +1048,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6598815579406187026, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
+      propertyPath: m_CameraTransform
+      value: 
+      objectReference: {fileID: 810272508}
+    - target: {fileID: 6598815579406187026, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
+      propertyPath: m_KeyboardTranslateSpace
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4485,7 +4492,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2c16ae51609eb4aa2a674e09d491e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAnim: {fileID: 0}
   attackObject: {fileID: 0}
   flamesBox: {fileID: 0}
   flamesObject: {fileID: 0}
