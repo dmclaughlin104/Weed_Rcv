@@ -2,6 +2,10 @@
   "report": {
     "modules": [
       {
+        "name": "AndroidJNI",
+        "dependencies": []
+      },
+      {
         "name": "Animation",
         "dependencies": [
           {
@@ -54,7 +58,6 @@
           {
             "name": "AudioBehaviour",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -71,7 +74,6 @@
           {
             "name": "AudioListener",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -119,7 +121,6 @@
           {
             "name": "Camera",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -140,7 +141,6 @@
           {
             "name": "Cubemap",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -161,7 +161,6 @@
           {
             "name": "EditorExtension",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 1,
@@ -176,7 +175,6 @@
           {
             "name": "GameObject",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -203,7 +201,6 @@
           {
             "name": "LevelGameManager",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 1,
@@ -212,7 +209,6 @@
           {
             "name": "Light",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -233,7 +229,14 @@
           {
             "name": "LightmapSettings",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
+              "Assets/Scenes/SampleScene.unity"
+            ],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
+            "name": "LineRenderer",
+            "scenes": [
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -248,7 +251,6 @@
           {
             "name": "Material",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -281,7 +283,6 @@
           {
             "name": "MonoBehaviour",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -296,7 +297,6 @@
           {
             "name": "MonoScript",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 1,
@@ -305,7 +305,6 @@
           {
             "name": "NamedObject",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 1,
@@ -338,7 +337,6 @@
           {
             "name": "RectTransform",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -353,7 +351,6 @@
           {
             "name": "RenderSettings",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -386,7 +383,6 @@
           {
             "name": "Shader",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -408,14 +404,15 @@
           },
           {
             "name": "SortingGroup",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/SampleScene.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
           {
             "name": "Sprite",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -482,6 +479,12 @@
             "icon": null
           },
           {
+            "name": "Required by AndroidJNI Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.androidjni"
+          },
+          {
             "name": "Required by Animation Module",
             "scenes": [],
             "dependencyType": 2,
@@ -498,6 +501,12 @@
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.imgui"
+          },
+          {
+            "name": "Required by Input Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.input"
           },
           {
             "name": "Required by InputLegacy Module",
@@ -524,10 +533,22 @@
             "icon": "package/com.unity.modules.physics"
           },
           {
+            "name": "Required by Physics2D Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.physics2d"
+          },
+          {
             "name": "Required by RuntimeInitializeOnLoadManagerInitializer Module",
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.runtimeinitializeonloadmanagerinitializer"
+          },
+          {
+            "name": "Required by Subsystems Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.subsystems"
           },
           {
             "name": "Required by TextCoreFontEngine Module",
@@ -560,10 +581,22 @@
             "icon": "package/com.unity.modules.uielements"
           },
           {
+            "name": "Required by VR Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.vr"
+          },
+          {
             "name": "Required by WebGL Module",
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.webgl"
+          },
+          {
+            "name": "Required by XR Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.xr"
           }
         ]
       },
@@ -575,6 +608,23 @@
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.uielements"
+          }
+        ]
+      },
+      {
+        "name": "Input",
+        "dependencies": [
+          {
+            "name": "Required by VR Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.vr"
+          },
+          {
+            "name": "Required by XR Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.xr"
           }
         ]
       },
@@ -599,16 +649,40 @@
         "name": "JSONSerialize",
         "dependencies": [
           {
+            "name": "Required by Input Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.input"
+          },
+          {
             "name": "Required by RuntimeInitializeOnLoadManagerInitializer Module",
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.runtimeinitializeonloadmanagerinitializer"
           },
           {
+            "name": "Required by Subsystems Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.subsystems"
+          },
+          {
             "name": "Required by UIElements Module",
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.uielements"
+          },
+          {
+            "name": "Required by VR Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.vr"
+          },
+          {
+            "name": "Required by XR Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.xr"
           }
         ]
       },
@@ -685,6 +759,35 @@
             ],
             "dependencyType": 0,
             "icon": null
+          },
+          {
+            "name": "SphereCollider",
+            "scenes": [],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
+            "name": "Required by VR Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.vr"
+          },
+          {
+            "name": "Required by XR Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.xr"
+          }
+        ]
+      },
+      {
+        "name": "Physics2D",
+        "dependencies": [
+          {
+            "name": "Physics2DSettings",
+            "scenes": [],
+            "dependencyType": 1,
+            "icon": null
           }
         ]
       },
@@ -702,6 +805,12 @@
       {
         "name": "SharedInternals",
         "dependencies": [
+          {
+            "name": "Required by AndroidJNI Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.androidjni"
+          },
           {
             "name": "Required by Animation Module",
             "scenes": [],
@@ -725,6 +834,12 @@
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.imgui"
+          },
+          {
+            "name": "Required by Input Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.input"
           },
           {
             "name": "Required by InputLegacy Module",
@@ -751,10 +866,22 @@
             "icon": "package/com.unity.modules.physics"
           },
           {
+            "name": "Required by Physics2D Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.physics2d"
+          },
+          {
             "name": "Required by RuntimeInitializeOnLoadManagerInitializer Module",
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.runtimeinitializeonloadmanagerinitializer"
+          },
+          {
+            "name": "Required by Subsystems Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.subsystems"
           },
           {
             "name": "Required by TextCoreFontEngine Module",
@@ -787,10 +914,33 @@
             "icon": "package/com.unity.modules.uielements"
           },
           {
+            "name": "Required by VR Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.vr"
+          },
+          {
             "name": "Required by WebGL Module",
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.webgl"
+          },
+          {
+            "name": "Required by XR Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.xr"
+          }
+        ]
+      },
+      {
+        "name": "Subsystems",
+        "dependencies": [
+          {
+            "name": "Required by XR Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.xr"
           }
         ]
       },
@@ -834,7 +984,6 @@
           {
             "name": "Font",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -884,7 +1033,6 @@
           {
             "name": "Canvas",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -892,14 +1040,15 @@
           },
           {
             "name": "CanvasGroup",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/SampleScene.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
           {
             "name": "CanvasRenderer",
             "scenes": [
-              "Assets/Scenes/Menu.unity",
               "Assets/Scenes/SampleScene.unity"
             ],
             "dependencyType": 0,
@@ -918,6 +1067,10 @@
         "dependencies": []
       },
       {
+        "name": "VR",
+        "dependencies": []
+      },
+      {
         "name": "WebGL",
         "dependencies": [
           {
@@ -925,6 +1078,17 @@
             "scenes": [],
             "dependencyType": 3,
             "icon": "class/DefaultAsset"
+          }
+        ]
+      },
+      {
+        "name": "XR",
+        "dependencies": [
+          {
+            "name": "Required by VR Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.vr"
           }
         ]
       }

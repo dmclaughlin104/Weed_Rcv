@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject flamesBox;//flames object with box collider
     [SerializeField] GameObject flamesObject;//flames affect in scene
     public GameObject grave;
-    [SerializeField] GameObject damageIndicator;
+    //[SerializeField] GameObject damageIndicator;
     private SpawnManager spawnManagerScript;
     [SerializeField] AudioSource playerAudio;
     [SerializeField] AudioClip slashSound;
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         {
             //playing slash sound effect
             //here rather than in method in an attempt to reduce lag
-            playerAudio.PlayOneShot (slashSound);
+            //playerAudio.PlayOneShot (slashSound);
 
             //carry out slash
             SlashEffect();
@@ -232,19 +232,19 @@ public class PlayerController : MonoBehaviour
     void HealthDamage()
     {
         healthCount--;
-        playerAudio.PlayOneShot(hurtSound);
+        //playerAudio.PlayOneShot(hurtSound);
         damageBufferWait = true;
         StartCoroutine(DamageBufferCountdown());
 
         //turn on damage indicator icon as long as player is still alive
         if (healthCount > 0)
         {
-            damageIndicator.gameObject.SetActive(true);
+            //damageIndicator.gameObject.SetActive(true);
         }
         //if health is fully depleted, play deathbell sound
         else if (healthCount == 0)
         {
-            playerAudio.PlayOneShot(deathSound);
+            //playerAudio.PlayOneShot(deathSound);
         }
     }
 
@@ -253,7 +253,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(damageBufferTime);
         damageBufferWait = false;
-        damageIndicator.gameObject.SetActive(false);
+        //damageIndicator.gameObject.SetActive(false);
         //UnityEngine.Debug.Log("Buffer wait = " + damageBufferWait + " ...and should be false");
     }
 

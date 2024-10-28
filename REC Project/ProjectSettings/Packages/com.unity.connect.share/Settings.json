@@ -19,7 +19,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"C:/Users/dmcla/Desktop/Video Game Technologies/MDL7001 - Introduction to Games Tech/Builds/Personal Project Build 3;C:/Users/dmcla/Desktop/Video Game Technologies/MDL7001 - Introduction to Games Tech/Builds/Personal Project Build 2;C:/Users/dmcla/Desktop/Video Game Technologies/MDL7001 - Introduction to Games Tech/Builds/Personal Project Build 1;;;;;;;\"}"
+                "value": "{\"m_Value\":\"C:/Users/dmcla/Desktop/Video Game Technologies/MDL7001 - Introduction to Games Tech/Builds;C:/Users/dmcla/Desktop/Video Game Technologies/MDL7001 - Introduction to Games Tech/Builds/Personal Project Build 3;C:/Users/dmcla/Desktop/Video Game Technologies/MDL7001 - Introduction to Games Tech/Builds/Personal Project Build 2;C:/Users/dmcla/Desktop/Video Game Technologies/MDL7001 - Introduction to Games Tech/Builds/Personal Project Build 1;;;;;;\"}"
             }
         ]
     }
