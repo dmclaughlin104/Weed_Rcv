@@ -76,3 +76,6 @@ REC Project/Library/ArtifactDB
 REC Project/Library/ArtifactDB
 REC Project/Library/ArtifactDB
 /REC Project/Library
+*.log
+REC Project/Logs/shadercompiler-UnityShaderCompiler.exe1.log
+/REC Project/Logs
