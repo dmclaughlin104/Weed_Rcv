@@ -1,0 +1,34 @@
+{
+    "name": "MyVRControls",
+    "maps": [
+        {
+            "name": "RightHand",
+            "id": "9e2241d3-db14-4977-a034-351446076595",
+            "actions": [
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "d193192a-3d77-4c03-bc8f-e51f5ce69b48",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5529395d-b309-4c21-a9a0-8c9c445e1061",
+                    "path": "<OculusTouchController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
