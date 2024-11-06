@@ -484,7 +484,6 @@ MonoBehaviour:
   flamesBox: {fileID: 1261264253}
   flamesObject: {fileID: 1528986035}
   grave: {fileID: 197061274}
-  damageIndicator: {fileID: 477164135}
   playerAudio: {fileID: 0}
   slashSound: {fileID: 8300000, guid: d68f2a9350ce742488bdcf1719787b75, type: 3}
   hurtSound: {fileID: 8300000, guid: 38033af30eb8cea4f837e385ee721c03, type: 3}
@@ -1102,7 +1101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4496,7 +4495,6 @@ MonoBehaviour:
   flamesBox: {fileID: 0}
   flamesObject: {fileID: 0}
   grave: {fileID: 0}
-  damageIndicator: {fileID: 0}
   playerAudio: {fileID: 0}
   slashSound: {fileID: 0}
   hurtSound: {fileID: 0}
