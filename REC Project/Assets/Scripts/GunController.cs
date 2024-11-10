@@ -14,6 +14,10 @@ public class GunController : MonoBehaviour
     [SerializeField] Transform spawnPointRight;
     [SerializeField] GameObject leftMele;
     [SerializeField] GameObject rightMele;
+    [SerializeField] GameObject leftGun;
+    [SerializeField] GameObject rightGun;
+    [SerializeField] GameObject rightControllerMesh;
+    [SerializeField] GameObject leftControllerMesh;
     [SerializeField] Button SwapGunHandButton;
 
     private InputActionReference activeShootButton;
@@ -51,6 +55,10 @@ public class GunController : MonoBehaviour
             activeShootButton = shootButtonRight;
             leftMele.SetActive(true);
             rightMele.SetActive(false);
+            leftGun.SetActive(false);
+            rightGun.SetActive(true);
+            rightControllerMesh.SetActive(false);
+            leftControllerMesh.SetActive(true);
         }
         else
         {
@@ -59,6 +67,10 @@ public class GunController : MonoBehaviour
             activeShootButton = shootButtonLeft;
             leftMele.SetActive(false);
             rightMele.SetActive(true);
+            leftGun.SetActive(true);
+            rightGun.SetActive(false);
+            rightControllerMesh.SetActive(true);
+            leftControllerMesh.SetActive(false);
         }
     }
 
