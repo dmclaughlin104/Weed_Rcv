@@ -96,8 +96,6 @@ public class GameManager : MonoBehaviour
         spawnManagerScript.gameActive = false;
         ResetForNextPlay();
         //spawnManagerScript.DeactivateAllEnemies();
-
-
     }
 
     // Method to call the game over screen and reset elements for the next play

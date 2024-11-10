@@ -50,6 +50,34 @@ public partial class @MyVRControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""LeftHand"",
+            ""id"": ""c8c93121-825d-482f-a62b-2a5c03047b07"",
+            ""actions"": [
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9d098db-84f6-4520-a945-44924928cc70"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ef1fdbad-d834-4211-a857-a71704d04c23"",
+                    ""path"": ""<OculusTouchController>{LeftHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -57,6 +85,9 @@ public partial class @MyVRControls: IInputActionCollection2, IDisposable
         // RightHand
         m_RightHand = asset.FindActionMap("RightHand", throwIfNotFound: true);
         m_RightHand_Shoot = m_RightHand.FindAction("Shoot", throwIfNotFound: true);
+        // LeftHand
+        m_LeftHand = asset.FindActionMap("LeftHand", throwIfNotFound: true);
+        m_LeftHand_Shoot = m_LeftHand.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -160,7 +191,57 @@ public partial class @MyVRControls: IInputActionCollection2, IDisposable
         }
     }
     public RightHandActions @RightHand => new RightHandActions(this);
+
+    // LeftHand
+    private readonly InputActionMap m_LeftHand;
+    private List<ILeftHandActions> m_LeftHandActionsCallbackInterfaces = new List<ILeftHandActions>();
+    private readonly InputAction m_LeftHand_Shoot;
+    public struct LeftHandActions
+    {
+        private @MyVRControls m_Wrapper;
+        public LeftHandActions(@MyVRControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Shoot => m_Wrapper.m_LeftHand_Shoot;
+        public InputActionMap Get() { return m_Wrapper.m_LeftHand; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LeftHandActions set) { return set.Get(); }
+        public void AddCallbacks(ILeftHandActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LeftHandActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LeftHandActionsCallbackInterfaces.Add(instance);
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
+        }
+
+        private void UnregisterCallbacks(ILeftHandActions instance)
+        {
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
+        }
+
+        public void RemoveCallbacks(ILeftHandActions instance)
+        {
+            if (m_Wrapper.m_LeftHandActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ILeftHandActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LeftHandActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LeftHandActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public LeftHandActions @LeftHand => new LeftHandActions(this);
     public interface IRightHandActions
+    {
+        void OnShoot(InputAction.CallbackContext context);
+    }
+    public interface ILeftHandActions
     {
         void OnShoot(InputAction.CallbackContext context);
     }
