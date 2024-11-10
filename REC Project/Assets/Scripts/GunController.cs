@@ -27,7 +27,6 @@ public class GunController : MonoBehaviour
     private float ammoRegenCooldown = 1f;
     private List<GameObject> bulletPool;
     private bool isRightHandActive = true;
-    private BulletController bulletControllerScript;
 
     // Melee and Gun objects for swapping
     [SerializeField] GameObject leftMele;
@@ -36,10 +35,13 @@ public class GunController : MonoBehaviour
     [SerializeField] GameObject rightGun;
     [SerializeField] GameObject rightControllerMesh;
     [SerializeField] GameObject leftControllerMesh;
-    [SerializeField] Button SwapGunHandButton;
+    [SerializeField] Button swapGunHandButton;
 
     // UI
-    [SerializeField] Slider ammoBar;
+    [SerializeField] Slider ammoBarLeft;
+    [SerializeField] Slider ammoBarRight;
+    [SerializeField] GameObject leftArmCanvas;
+    [SerializeField] GameObject rightArmCanvas;
 
     void Start()
     {
@@ -50,7 +52,7 @@ public class GunController : MonoBehaviour
 
         // Setup hand and ammo regeneration coroutine
         SetupHand(isRightHandActive);
-        SwapGunHandButton.onClick.AddListener(SwapGunHand);
+        swapGunHandButton.onClick.AddListener(SwapGunHand);
         StartCoroutine(RegenerateAmmo());
 
     }
@@ -134,6 +136,8 @@ public class GunController : MonoBehaviour
             rightGun.SetActive(true);
             rightControllerMesh.SetActive(false);
             leftControllerMesh.SetActive(true);
+            leftArmCanvas.SetActive(false);
+            rightArmCanvas.SetActive(true);
         }
         else
         {
@@ -145,6 +149,8 @@ public class GunController : MonoBehaviour
             rightGun.SetActive(false);
             rightControllerMesh.SetActive(true);
             leftControllerMesh.SetActive(false);
+            leftArmCanvas.SetActive(true);
+            rightArmCanvas.SetActive(false);
         }
     }
 
@@ -172,10 +178,12 @@ public class GunController : MonoBehaviour
     // Update ammo bar
     private void UpdateAmmoBar()
     {
-        if (ammoBar != null)
+        if (ammoBarLeft != null || ammoBarRight != null)
         {
-            ammoBar.maxValue = maxAmmo;
-            ammoBar.value = currentAmmo;
+            ammoBarLeft.maxValue = maxAmmo;
+            ammoBarLeft.value = currentAmmo;
+            ammoBarRight.maxValue = maxAmmo;
+            ammoBarRight.value = currentAmmo;
         }
     }
 }
