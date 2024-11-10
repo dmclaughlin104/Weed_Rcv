@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class EnemyController : MonoBehaviour
 {
@@ -10,7 +8,6 @@ public class EnemyController : MonoBehaviour
     public Animator enemyAnim;
     private Rigidbody enemyRB;
     public GameObject smokeParticle;
-    //public GameObject weedBloodParticle;
     public GameObject[] enemyBodyParts;
     public SpawnManager spawnManagerScript;
     private Transform player;
@@ -23,54 +20,49 @@ public class EnemyController : MonoBehaviour
     private bool isJumping = false;
     public bool gameActive = false;
 
+    // Store original colors for each body part
+    private Color[] originalColors;
+
     // Start is called before the first frame update
     void Start()
     {
-        //getting spawnManagerScript component
+        // Get spawn manager component
         spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
 
-        //getting weed animator
+        // Get animator and rigidbody
         enemyAnim = GetComponent<Animator>();
-
-        //getting rigidbody
         enemyRB = GetComponent<Rigidbody>();
 
-        // Find the player object's transform
+        // Find the player's transform
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        // Capture original colors of each body part
+        originalColors = new Color[enemyBodyParts.Length];
+        for (int i = 0; i < enemyBodyParts.Length; i++)
+        {
+            SkinnedMeshRenderer bodyPartMesh = enemyBodyParts[i].GetComponent<SkinnedMeshRenderer>();
+            originalColors[i] = bodyPartMesh.material.color;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //controlling enemy movement, so long as enemy isn't dead
         if (!isDead && spawnManagerScript.gameActive)
         {
-            // Look at the player
             LookAtPlayer();
-
-            // Move toward the player
             MoveTowardsPlayer();
-
-
         }
 
-        //trigger roar animation when player is defeated
         if (!spawnManagerScript.gameActive)
         {
             this.enemyAnim.SetBool("playerDead", true);
-        }
-
-        if (spawnManagerScript.gameActive == false)
-        {
             spawnManagerScript.DeactivateEnemy(gameObject);
             ResetEnemyRB();
             ResetEnemy();
         }
-
     }
 
-    //method to make enemy look torward player
     void LookAtPlayer()
     {
         Vector3 direction = (player.position - transform.position).normalized;
@@ -78,53 +70,29 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
-    //method to make enemy move toward player
     void MoveTowardsPlayer()
     {
-        // Calculate the movement direction towards the player
         moveDirection = (player.position - transform.position).normalized;
-
-        // Move the enemy towards the player
         transform.Translate(moveDirection * movementSpeed * Time.deltaTime, Space.World);
     }
 
-    //manage triggers
     private void OnTriggerEnter(Collider other)
     {
-        //if enemy has been slashed:
         if (other.CompareTag("Slash"))
         {
-            //make blood effect start, after brief delay
-            //StartCoroutine(bloodDelay());
-
-            //trigger enemy death
             EnemyDeath();
-
-            //push enemy back on slash attack
             enemyRB.AddForce(-moveDirection * attackForce, ForceMode.Impulse);
-
-            //deactivate enemy instead of destroying it
             StartCoroutine(ResetEnemyRB(1.5f));
             StartCoroutine(DeactivateEnemy(2f));
-                        
         }
-        //if enemy hit by flames
         else if (other.CompareTag("Flames"))
         {
-            //start smoke effect after pause
             StartCoroutine(SmokeDelay());
-
-            //trigger enemy death
             EnemyDeath();
-
-            //change weed material colour
             ChangeWeedMaterialBlack();
-
-            //deactivate enemy after a longer time (for smoke effect)
             StartCoroutine(DeactivateEnemy(4f));
-            
+            other.gameObject.SetActive(false);
         }
-        //tigger bite animation if enemy collides with player
         else if (other.CompareTag("Player"))
         {
             this.enemyAnim.SetBool("bitePlayer", true);
@@ -132,46 +100,25 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    //trigger jump animation if enemy gets within a certain distance of player
-    void CheckDistanceToPlayer()
-    {
-        float jumpZone = 2f;
-
-        if (Vector3.Distance(transform.position, player.transform.position) < jumpZone)
-        {
-            enemyAnim.SetBool("inZone", true);
-            isJumping = true;
-            StartCoroutine(JumpingCoolDown());
-        }
-        else
-        {
-            enemyAnim.SetBool("inZone", false);
-        }
-    }
-
-    //Cooldown Co-routine for biting
     IEnumerator BiteCoolDown()
     {
         yield return new WaitForSeconds(1f);
         this.enemyAnim.SetBool("bitePlayer", false);
     }
 
-    //Cooldown Co-routine for jumping
     IEnumerator JumpingCoolDown()
     {
         yield return new WaitForSeconds(1f);
         isJumping = false;
     }
 
-    //controlling enemy after death
     void EnemyDeath()
     {
-        isDead = true;//stopping enemy movement
+        isDead = true;
         this.enemyAnim.SetBool("isDead", true);
-        transform.gameObject.tag = "Dead Enemy";//changing tag so enemy doesn't cause health damage after dying
+        transform.gameObject.tag = "Dead Enemy";
     }
 
-    //method for changing key parts of enemy to black
     void ChangeWeedMaterialBlack()
     {
         foreach (GameObject bodyPart in enemyBodyParts)
@@ -181,22 +128,12 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    //waits until enemy is settled on ground before smoke effect starts
     public IEnumerator SmokeDelay()
     {
         yield return new WaitForSeconds(0.9f);
         smokeParticle.SetActive(true);
     }
-    /*
-    //brief delay before blood effect starts
-    public IEnumerator bloodDelay()
-    {
-        yield return new WaitForSeconds(0.25f);
-        weedBloodParticle.SetActive(true);
-    }
-    */
 
-    // Deactivate enemy after delay and return to object pool
     IEnumerator DeactivateEnemy(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -205,23 +142,19 @@ public class EnemyController : MonoBehaviour
         ResetEnemy();
     }
 
-    
     public void ResetEnemyRB()
     {
-        enemyRB.velocity = new Vector3(0, 0, 0);
-        enemyRB.angularVelocity = new Vector3(0, 0, 0);
+        enemyRB.velocity = Vector3.zero;
+        enemyRB.angularVelocity = Vector3.zero;
     }
 
     IEnumerator ResetEnemyRB(float delay)
     {
         yield return new WaitForSeconds(delay);
-        //removing any RB physics effects from previous interactions
-        enemyRB.velocity = new Vector3(0, 0, 0);
-        enemyRB.angularVelocity = new Vector3(0, 0, 0);
-
+        enemyRB.velocity = Vector3.zero;
+        enemyRB.angularVelocity = Vector3.zero;
     }
 
-    // Reset the enemy's state for reactivation from the pool
     public void ResetEnemy()
     {
         isDead = false;
@@ -229,20 +162,14 @@ public class EnemyController : MonoBehaviour
         this.enemyAnim.SetBool("playerDead", false);
         this.enemyAnim.SetBool("bitePlayer", false);
         this.enemyAnim.SetBool("inZone", false);
-        transform.gameObject.tag = "Weed Enemy"; // Reset the tag
-        //weedBloodParticle.SetActive(false);
+        transform.gameObject.tag = "Weed Enemy";
         smokeParticle.SetActive(false);
-        //ChangeWeedMaterialOriginal(); // Reset material color if changed
 
-    }
-
-    // Reset the weed material color (optional method to restore original color)
-    void ChangeWeedMaterialOriginal()
-    {
-        foreach (GameObject bodyPart in enemyBodyParts)
+        // Restore original colors
+        for (int i = 0; i < enemyBodyParts.Length; i++)
         {
-            SkinnedMeshRenderer bodyPartMesh = bodyPart.GetComponent<SkinnedMeshRenderer>();
-            bodyPartMesh.material.color = Color.green; // Assuming original color is green
+            SkinnedMeshRenderer bodyPartMesh = enemyBodyParts[i].GetComponent<SkinnedMeshRenderer>();
+            bodyPartMesh.material.color = originalColors[i];
         }
     }
 }

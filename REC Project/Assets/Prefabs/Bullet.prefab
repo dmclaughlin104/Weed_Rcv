@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6161385231944523100}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Flames
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,5 +146,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4386ac37d1b6b46a64e8dc57a2b058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootForce: 1000
-  timeToDestroy: 10

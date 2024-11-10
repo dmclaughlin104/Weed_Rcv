@@ -6,7 +6,7 @@ public class BulletController : MonoBehaviour
 {
     private float shootForce = 1000;
     Rigidbody bulletRigidBody;
-    private float timeToDestroy = 10;
+    private float timeToDestroy = 3;
 
     // Start is called before the first frame update
     void Start()
