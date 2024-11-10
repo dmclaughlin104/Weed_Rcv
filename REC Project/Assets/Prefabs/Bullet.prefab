@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 898161593603736771}
   - component: {fileID: 3943604725512707134}
   - component: {fileID: 3871111737356532149}
-  - component: {fileID: 6161385231944523100}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Flames
@@ -134,15 +133,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &6161385231944523100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006123779515424504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e4386ac37d1b6b46a64e8dc57a2b058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

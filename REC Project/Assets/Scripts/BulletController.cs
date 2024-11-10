@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    private float shootForce = 1000;
-    Rigidbody bulletRigidBody;
-    private float timeToDestroy = 3;
+    private float shootForce = 1000f;
+    private Rigidbody bulletRigidBody;
+    private float timeToLive = 3f;
 
-    // Start is called before the first frame update
-    void Start()
+    // Called when the bullet is activated
+    public void ActivateBullet(Vector3 position, Quaternion rotation)
     {
+        // Reset position and rotation
+        transform.position = position;
+        transform.rotation = rotation;
+
+        // Reset physics and apply shooting force
         bulletRigidBody = GetComponent<Rigidbody>();
+        bulletRigidBody.velocity = Vector3.zero;
+        bulletRigidBody.angularVelocity = Vector3.zero;
         bulletRigidBody.AddForce(transform.forward * shootForce);
+
+        // Start the lifetime countdown
+        StartCoroutine(LifetimeCountdown());
     }
 
-    // Update is called once per frame
-    void Update()
+    // Recycle bullet after it has expired
+    private IEnumerator LifetimeCountdown()
     {
-        timeToDestroy -= Time.deltaTime;
-        if (timeToDestroy < 0)
-        {
-            Destroy(gameObject);
-        }
+        yield return new WaitForSeconds(timeToLive);
+        gameObject.SetActive(false); // Return to pool
     }
 }
