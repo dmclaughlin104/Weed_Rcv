@@ -18,12 +18,17 @@ public class SpawnManager : MonoBehaviour
     private List<GameObject> enemyPool; // Pool for enemies
     public List<GameObject> activeEnemies; // List to track currently active enemies
 
-    // Game status
+    // Game status and difficulty settings
     public bool gameActive = false;
+    public enum Difficulty { Easy, Medium, Hard }
+    public Difficulty gameDifficulty;
+
+    // Spawn timing
+    private float spawnInterval;
+    private float spawnTimer = 0f;
 
     void Start()
     {
-        
         // Initialize the enemy pool
         enemyPool = new List<GameObject>();
         activeEnemies = new List<GameObject>();
@@ -35,6 +40,9 @@ public class SpawnManager : MonoBehaviour
             enemy.SetActive(false); // Initially set the enemy to inactive
             enemyPool.Add(enemy);
         }
+
+        // Set the spawn interval based on the difficulty level
+        SetDifficulty(gameDifficulty);
     }
 
     void Update()
@@ -42,38 +50,32 @@ public class SpawnManager : MonoBehaviour
         // Update the enemy count based on the number of active enemies
         enemyCount = activeEnemies.Count;
 
-        // If the game is active, start gameplay spawning
+        // If the game is active, continuously spawn enemies at set intervals
         if (gameActive)
         {
-            StartGameplay();
-        }
-    }
-
-    // Method to start the main gameplay spawning loop
-    public void StartGameplay()
-    {
-        // If all enemies are defeated, spawn more
-        if (enemyCount == 0)
-        {
-            nextWave++; // Increase the number in the wave
-            SpawnEnemyWave(nextWave);
-
-            // Spawn a power-up every even-numbered wave (over 4)
-            if (nextWave >= 4 && (nextWave % 2) == 0)
+            spawnTimer += Time.deltaTime;
+            if (spawnTimer >= spawnInterval)
             {
-                //SpawnPowerUp();
+                SpawnEnemy();
+                spawnTimer = 0f; // Reset the timer
             }
         }
     }
 
-    // Spawn an enemy wave
-    void SpawnEnemyWave(int waveNumber)
+    // Method to set the spawn interval based on the selected difficulty level
+    void SetDifficulty(Difficulty difficulty)
     {
-        // Spawn a number of enemies corresponding with the wave number
-        for (int count = 0; count < waveNumber; count++)
+        if (difficulty == Difficulty.Easy)
         {
-            SpawnEnemy();
-            enemyCount++;
+            spawnInterval = 5f; // Easy mode spawns every 3 seconds
+        }
+        else if (difficulty == Difficulty.Medium)
+        {
+            spawnInterval = 3f; // Medium mode spawns every 2 seconds
+        }
+        else if (difficulty == Difficulty.Hard)
+        {
+            spawnInterval = 2.5f; // Hard mode spawns every 1 second
         }
     }
 
@@ -159,7 +161,6 @@ public class SpawnManager : MonoBehaviour
 
             enemyController.ResetEnemyRB();
             enemyController.ResetEnemy();
-
         }
     }
 
