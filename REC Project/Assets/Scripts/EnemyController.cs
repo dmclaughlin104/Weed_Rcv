@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    //object variables
+    // Object variables
     public Animator enemyAnim;
     private Rigidbody enemyRB;
     public GameObject smokeParticle;
@@ -12,13 +12,12 @@ public class EnemyController : MonoBehaviour
     public SpawnManager spawnManagerScript;
     private Transform player;
 
-    //variables
+    // Movement variables
     private float movementSpeed = 1f;
     private bool isDead = false;
     private float attackForce = 1.5f;
     Vector3 moveDirection;
     private bool isJumping = false;
-    public bool gameActive = false;
 
     // Store original colors for each body part
     private Color[] originalColors;
@@ -26,14 +25,12 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Get spawn manager component
+        // Get SpawnManager component
         spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
 
-        // Get animator and rigidbody
+        // Initialize other components
         enemyAnim = GetComponent<Animator>();
         enemyRB = GetComponent<Rigidbody>();
-
-        // Find the player's transform
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         // Capture original colors of each body part
@@ -45,9 +42,30 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    // Adjust the movement speed based on the difficulty level from SpawnManager
+    void SetMovementSpeedByDifficulty()
+    {
+        if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Easy)
+        {
+            movementSpeed = 1f; // slower speed for easy
+        }
+        else if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Medium)
+        {
+            movementSpeed = 1.2f; // medium speed for medium difficulty
+        }
+        else if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Hard)
+        {
+            movementSpeed = 1.75f; // fastest speed for hard
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+
+        // Adjust enemy speed based on difficulty
+        SetMovementSpeedByDifficulty();
+
         if (!isDead && spawnManagerScript.gameActive)
         {
             LookAtPlayer();
