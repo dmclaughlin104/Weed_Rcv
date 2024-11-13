@@ -15,7 +15,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] float playerSafetyZone = 7f;
 
     // Object pool variables
-    public int initialPoolSize = 15; // Start with 15 enemies in the pool
+    private int initialPoolSize = 15; // Start with 15 enemies in the pool
     private List<GameObject> enemyPool; // Pool for enemies
     public List<GameObject> activeEnemies; // List to track currently active enemies
 
@@ -23,6 +23,10 @@ public class SpawnManager : MonoBehaviour
     public bool gameActive = false;
     public enum Difficulty { Easy, Medium, Hard }
     public Difficulty gameDifficulty;
+
+    // Button colors
+    [SerializeField] private Color selectedColor = Color.green;
+    [SerializeField] private Color defaultColor = Color.white;
 
     // Spawn timing
     private float spawnInterval;
@@ -47,16 +51,13 @@ public class SpawnManager : MonoBehaviour
             enemyPool.Add(enemy);
         }
 
-
         EasyMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Easy));
         MediumMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Medium));
         HardMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Hard));
 
-
-        // Set the spawn interval based on the difficulty level
+        // Set initial difficulty and update button colors
         SetDifficulty(gameDifficulty);
-
-
+        UpdateButtonColors();
     }
 
     void Update()
@@ -95,10 +96,19 @@ public class SpawnManager : MonoBehaviour
             playerSafetyZone = 5.5f;
         }
     }
+
     void SetGameDifficulty(Difficulty difficulty)
     {
         gameDifficulty = difficulty;
         SetDifficulty(difficulty); // Update spawnInterval based on the selected difficulty
+        UpdateButtonColors();       // Update button colors based on the selected difficulty
+    }
+
+    void UpdateButtonColors()
+    {
+        EasyMode.image.color = (gameDifficulty == Difficulty.Easy) ? selectedColor : defaultColor;
+        MediumMode.image.color = (gameDifficulty == Difficulty.Medium) ? selectedColor : defaultColor;
+        HardMode.image.color = (gameDifficulty == Difficulty.Hard) ? selectedColor : defaultColor;
     }
 
     // Method to spawn an enemy using object pooling
