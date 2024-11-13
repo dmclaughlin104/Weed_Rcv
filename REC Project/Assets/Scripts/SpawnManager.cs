@@ -9,13 +9,13 @@ public class SpawnManager : MonoBehaviour
     public GameObject player;
     public GameObject enemyPrefab;
     public GameObject powerUpPrefab;
-    private float spawnRange = 7;
+    private float spawnRange = 8;
     public int enemyCount;
     public int nextWave;
-    private float playerSafetyZone = 5f;
+    [SerializeField] float playerSafetyZone = 7f;
 
     // Object pool variables
-    public int initialPoolSize = 15; // Start with 30 enemies in the pool
+    public int initialPoolSize = 15; // Start with 15 enemies in the pool
     private List<GameObject> enemyPool; // Pool for enemies
     public List<GameObject> activeEnemies; // List to track currently active enemies
 
@@ -25,7 +25,7 @@ public class SpawnManager : MonoBehaviour
     public Difficulty gameDifficulty;
 
     // Spawn timing
-    [SerializeField] float spawnInterval;
+    private float spawnInterval;
     private float spawnTimer = 0f;
 
     // difficulty levels
@@ -76,20 +76,23 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    // Method to set the spawn interval based on the selected difficulty level
+    // Method to set the spawn interval and safety zone based on the selected difficulty level
     void SetDifficulty(Difficulty difficulty)
     {
         if (difficulty == Difficulty.Easy)
         {
-            spawnInterval = 3f; // Easy mode spawns every 3 seconds
+            spawnInterval = 3f;
+            playerSafetyZone = 7f;
         }
         else if (difficulty == Difficulty.Medium)
         {
-            spawnInterval = 2f; // Medium mode spawns every 2 seconds
+            spawnInterval = 2f;
+            playerSafetyZone = 6f;
         }
         else if (difficulty == Difficulty.Hard)
         {
-            spawnInterval = 1.75f; // Hard mode spawns every 1.75 seconds
+            spawnInterval = 1.75f;
+            playerSafetyZone = 5.5f;
         }
     }
     void SetGameDifficulty(Difficulty difficulty)
@@ -97,7 +100,6 @@ public class SpawnManager : MonoBehaviour
         gameDifficulty = difficulty;
         SetDifficulty(difficulty); // Update spawnInterval based on the selected difficulty
     }
-
 
     // Method to spawn an enemy using object pooling
     void SpawnEnemy()
