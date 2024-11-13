@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -24,8 +25,13 @@ public class SpawnManager : MonoBehaviour
     public Difficulty gameDifficulty;
 
     // Spawn timing
-    private float spawnInterval;
+    [SerializeField] float spawnInterval;
     private float spawnTimer = 0f;
+
+    // difficulty levels
+    [SerializeField] Button EasyMode;
+    [SerializeField] Button MediumMode;
+    [SerializeField] Button HardMode;
 
     void Start()
     {
@@ -41,8 +47,16 @@ public class SpawnManager : MonoBehaviour
             enemyPool.Add(enemy);
         }
 
+
+        EasyMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Easy));
+        MediumMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Medium));
+        HardMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Hard));
+
+
         // Set the spawn interval based on the difficulty level
         SetDifficulty(gameDifficulty);
+
+
     }
 
     void Update()
@@ -67,17 +81,23 @@ public class SpawnManager : MonoBehaviour
     {
         if (difficulty == Difficulty.Easy)
         {
-            spawnInterval = 5f; // Easy mode spawns every 3 seconds
+            spawnInterval = 3f; // Easy mode spawns every 3 seconds
         }
         else if (difficulty == Difficulty.Medium)
         {
-            spawnInterval = 3f; // Medium mode spawns every 2 seconds
+            spawnInterval = 2f; // Medium mode spawns every 2 seconds
         }
         else if (difficulty == Difficulty.Hard)
         {
-            spawnInterval = 2.5f; // Hard mode spawns every 1 second
+            spawnInterval = 1.75f; // Hard mode spawns every 1.75 seconds
         }
     }
+    void SetGameDifficulty(Difficulty difficulty)
+    {
+        gameDifficulty = difficulty;
+        SetDifficulty(difficulty); // Update spawnInterval based on the selected difficulty
+    }
+
 
     // Method to spawn an enemy using object pooling
     void SpawnEnemy()
