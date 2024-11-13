@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7005209292566827323}
   m_Layer: 0
   m_Name: EnemyBullet
-  m_TagString: Flames
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

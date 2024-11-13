@@ -19,6 +19,13 @@ public class EnemyController : MonoBehaviour
     Vector3 moveDirection;
     private bool isJumping = false;
 
+    // Shooting variables
+    public GameObject enemyBulletPrefab; // Reference to the bullet prefab
+    private float shootTimer = 0f; // Timer for shooting intervals
+    private float minShootInterval = 5f;
+    private float maxShootInterval = 10f;
+    private float currentShootInterval; // Randomized interval for shooting
+
     // Store original colors for each body part
     private Color[] originalColors;
 
@@ -40,6 +47,43 @@ public class EnemyController : MonoBehaviour
             SkinnedMeshRenderer bodyPartMesh = enemyBodyParts[i].GetComponent<SkinnedMeshRenderer>();
             originalColors[i] = bodyPartMesh.material.color;
         }
+
+        // Set the initial shooting interval
+        SetShootingIntervalByDifficulty();
+        currentShootInterval = Random.Range(minShootInterval, maxShootInterval);
+
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        // Adjust enemy speed based on difficulty
+        SetMovementSpeedByDifficulty();
+
+        if (!isDead && spawnManagerScript.gameActive)
+        {
+            LookAtPlayer();
+            MoveTowardsPlayer();
+
+            // Check for shooting based on timer
+            shootTimer += Time.deltaTime;
+            if (shootTimer >= currentShootInterval)
+            {
+                ShootAtPlayer();
+                shootTimer = 0f; // Reset the timer
+                SetShootingIntervalByDifficulty(); // Set a new randomized interval
+            }
+        }
+
+        if (!spawnManagerScript.gameActive)
+        {
+            this.enemyAnim.SetBool("playerDead", true);
+            spawnManagerScript.DeactivateEnemy(gameObject);
+            ResetEnemyRB();
+            ResetEnemy();
+        }
     }
 
     // Adjust the movement speed based on the difficulty level from SpawnManager
@@ -59,25 +103,42 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    // Set shooting interval based on difficulty
+    void SetShootingIntervalByDifficulty()
     {
-
-        // Adjust enemy speed based on difficulty
-        SetMovementSpeedByDifficulty();
-
-        if (!isDead && spawnManagerScript.gameActive)
+        if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Easy)
         {
-            LookAtPlayer();
-            MoveTowardsPlayer();
+            minShootInterval = 6f;
+            maxShootInterval = 12f;
         }
-
-        if (!spawnManagerScript.gameActive)
+        else if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Medium)
         {
-            this.enemyAnim.SetBool("playerDead", true);
-            spawnManagerScript.DeactivateEnemy(gameObject);
-            ResetEnemyRB();
-            ResetEnemy();
+            minShootInterval = 5f;
+            maxShootInterval = 10f;
+        }
+        else if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Hard)
+        {
+            minShootInterval = 4f;
+            maxShootInterval = 8f;
+        }
+        currentShootInterval = Random.Range(minShootInterval, maxShootInterval);
+    }
+
+    // Method to shoot a projectile at the player
+    void ShootAtPlayer()
+    {
+        if (enemyBulletPrefab != null && player != null)
+        {
+            // Instantiate the bullet at the enemy's position
+            GameObject bullet = Instantiate(enemyBulletPrefab, transform.position, Quaternion.identity);
+
+            // Calculate direction towards player's head position (assume head height is Y + 1.5f)
+            Vector3 playerHeadPos = new Vector3(player.position.x, player.position.y + 1.5f, player.position.z);
+            Vector3 shootDirection = (playerHeadPos - transform.position).normalized;
+
+            // Set bullet's velocity to move towards player's head
+            Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+            bulletRb.velocity = shootDirection * 10f; // Adjust speed as needed
         }
     }
 
