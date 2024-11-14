@@ -12,6 +12,9 @@ public class EnemyController : MonoBehaviour
     public SpawnManager spawnManagerScript;
     private Transform player;
 
+    // New variable for mouth position
+    public Transform mouthPoint;
+
     // Movement variables
     private float movementSpeed = 1f;
     private bool isDead = false;
@@ -51,14 +54,11 @@ public class EnemyController : MonoBehaviour
         // Set the initial shooting interval
         SetShootingIntervalByDifficulty();
         currentShootInterval = Random.Range(minShootInterval, maxShootInterval);
-
     }
-
 
     // Update is called once per frame
     void Update()
     {
-
         // Adjust enemy speed based on difficulty
         SetMovementSpeedByDifficulty();
 
@@ -85,6 +85,7 @@ public class EnemyController : MonoBehaviour
             ResetEnemy();
         }
     }
+
 
     // Adjust the movement speed based on the difficulty level from SpawnManager
     void SetMovementSpeedByDifficulty()
@@ -124,23 +125,37 @@ public class EnemyController : MonoBehaviour
         currentShootInterval = Random.Range(minShootInterval, maxShootInterval);
     }
 
-    // Method to shoot a projectile at the player
     void ShootAtPlayer()
     {
-        if (enemyBulletPrefab != null && player != null)
+        // Check with ShootingManager if this enemy can shoot
+        if (EnemyShootingManager.Instance != null && EnemyShootingManager.Instance.RequestToShoot())
         {
-            // Instantiate the bullet at the enemy's position
-            GameObject bullet = Instantiate(enemyBulletPrefab, transform.position, Quaternion.identity);
+            GameObject bullet = EnemyBulletPool.Instance.GetBullet();
 
-            // Calculate direction towards player's head position (assume head height is Y + 1.5f)
-            Vector3 playerHeadPos = new Vector3(player.position.x, player.position.y + 1.5f, player.position.z);
-            Vector3 shootDirection = (playerHeadPos - transform.position).normalized;
+            if (bullet != null && player != null && mouthPoint != null)
+            {
+                // Reset bullet position and activate it
+                bullet.transform.position = mouthPoint.position;
+                bullet.transform.rotation = Quaternion.identity;
+                bullet.SetActive(true);
 
-            // Set bullet's velocity to move towards player's head
-            Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-            bulletRb.velocity = shootDirection * 10f; // Adjust speed as needed
+                // Calculate the target direction toward the player's head
+                Vector3 playerHeadPos = new Vector3(player.position.x, player.position.y + 1.5f, player.position.z);
+                Vector3 shootDirection = (playerHeadPos - mouthPoint.position).normalized;
+
+                // Set bullet velocity
+                Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+                if (bulletRb != null)
+                {
+                    float bulletSpeed = 5f; // Adjust speed as needed
+                    bulletRb.velocity = shootDirection * bulletSpeed;
+                }
+            }
         }
     }
+
+
+
 
     void LookAtPlayer()
     {
