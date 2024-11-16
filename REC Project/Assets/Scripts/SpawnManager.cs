@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -19,24 +18,12 @@ public class SpawnManager : MonoBehaviour
     private List<GameObject> enemyPool; // Pool for enemies
     public List<GameObject> activeEnemies; // List to track currently active enemies
 
-    // Game status and difficulty settings
+    // Game status
     public bool gameActive = false;
-    public enum Difficulty { Easy, Medium, Hard }
-    public Difficulty gameDifficulty;
-
-    // Button colors
-    [SerializeField] private Color selectedColor = Color.green;
-    [SerializeField] private Color defaultColor = Color.white;
 
     // Spawn timing
     private float spawnInterval;
     private float spawnTimer = 0f;
-
-    // difficulty levels
-    public Button easyMode;
-    public Button mediumMode;
-    public Button hardMode;
-    public string currentDifficulty;
 
     void Start()
     {
@@ -51,14 +38,6 @@ public class SpawnManager : MonoBehaviour
             enemy.SetActive(false); // Initially set the enemy to inactive
             enemyPool.Add(enemy);
         }
-
-        easyMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Easy));
-        mediumMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Medium));
-        hardMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Hard));
-
-        // Set initial difficulty and update button colors
-        SetDifficulty(gameDifficulty);
-        UpdateButtonColors();
     }
 
     void Update()
@@ -79,37 +58,10 @@ public class SpawnManager : MonoBehaviour
     }
 
     // Method to set the spawn interval and safety zone based on the selected difficulty level
-    void SetDifficulty(Difficulty difficulty)
+    public void SetDifficultySettings(float interval, float safetyZone)
     {
-        if (difficulty == Difficulty.Easy)
-        {
-            spawnInterval = 3f;
-            playerSafetyZone = 7f;
-        }
-        else if (difficulty == Difficulty.Medium)
-        {
-            spawnInterval = 2f;
-            playerSafetyZone = 6f;
-        }
-        else if (difficulty == Difficulty.Hard)
-        {
-            spawnInterval = 1.75f;
-            playerSafetyZone = 5.5f;
-        }
-    }
-
-    void SetGameDifficulty(Difficulty difficulty)
-    {
-        gameDifficulty = difficulty;
-        SetDifficulty(difficulty); // Update spawnInterval based on the selected difficulty
-        UpdateButtonColors();       // Update button colors based on the selected difficulty
-    }
-
-    void UpdateButtonColors()
-    {
-        easyMode.image.color = (gameDifficulty == Difficulty.Easy) ? selectedColor : defaultColor;
-        mediumMode.image.color = (gameDifficulty == Difficulty.Medium) ? selectedColor : defaultColor;
-        hardMode.image.color = (gameDifficulty == Difficulty.Hard) ? selectedColor : defaultColor;
+        spawnInterval = interval;
+        playerSafetyZone = safetyZone;
     }
 
     // Method to spawn an enemy using object pooling
@@ -180,26 +132,16 @@ public class SpawnManager : MonoBehaviour
 
     public void DeactivateAllEnemies()
     {
-        // Loop through all active enemies in the activeEnemies list
         for (int i = activeEnemies.Count - 1; i >= 0; i--)
         {
-            // Get the enemy from the list
             GameObject enemy = activeEnemies[i];
-
-            // Get the EnemyController component attached to the enemy
-            EnemyController enemyController = enemy.GetComponent<EnemyController>();
-
-            // Deactivate the enemy using the DeactivateEnemy method
             DeactivateEnemy(enemy);
 
+            EnemyController enemyController = enemy.GetComponent<EnemyController>();
             enemyController.ResetEnemyRB();
             enemyController.ResetEnemy();
         }
     }
 
-    // Method to reset next wave back to zero - called in GameManager script
-    public void ResetNextWave()
-    {
-        nextWave = 0;
-    }
+
 }

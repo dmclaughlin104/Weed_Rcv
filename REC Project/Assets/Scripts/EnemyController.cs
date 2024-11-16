@@ -102,17 +102,17 @@ public class EnemyController : MonoBehaviour
     // Adjust the movement speed based on the difficulty level from SpawnManager
     void SetMovementSpeedByDifficulty()
     {
-        if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Easy)
+        if (gameManagerScript.gameDifficulty == GameManager.Difficulty.Easy)
         {
             movementSpeed = 1f; // slower speed for easy
             bulletSpeed = 3f;
         }
-        else if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Medium)
+        else if (gameManagerScript.gameDifficulty == GameManager.Difficulty.Medium)
         {
             movementSpeed = 1.2f; // medium speed for medium difficulty
             bulletSpeed = 6f;
         }
-        else if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Hard)
+        else if (gameManagerScript.gameDifficulty == GameManager.Difficulty.Hard)
         {
             movementSpeed = 1.75f; // fastest speed for hard
             bulletSpeed = 9f;
@@ -121,17 +121,17 @@ public class EnemyController : MonoBehaviour
 
     void SetShootingIntervalByDifficulty()
     {
-        if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Easy)
+        if (gameManagerScript.gameDifficulty == GameManager.Difficulty.Easy)
         {
             minShootInterval = 6f;
             maxShootInterval = 12f;
         }
-        else if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Medium)
+        else if (gameManagerScript.gameDifficulty == GameManager.Difficulty.Medium)
         {
             minShootInterval = 5f;
             maxShootInterval = 10f;
         }
-        else if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Hard)
+        else if (gameManagerScript.gameDifficulty == GameManager.Difficulty.Hard)
         {
             minShootInterval = 4f;
             maxShootInterval = 8f;
