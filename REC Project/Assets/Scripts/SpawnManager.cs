@@ -33,9 +33,10 @@ public class SpawnManager : MonoBehaviour
     private float spawnTimer = 0f;
 
     // difficulty levels
-    [SerializeField] Button EasyMode;
-    [SerializeField] Button MediumMode;
-    [SerializeField] Button HardMode;
+    public Button easyMode;
+    public Button mediumMode;
+    public Button hardMode;
+    public string currentDifficulty;
 
     void Start()
     {
@@ -51,9 +52,9 @@ public class SpawnManager : MonoBehaviour
             enemyPool.Add(enemy);
         }
 
-        EasyMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Easy));
-        MediumMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Medium));
-        HardMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Hard));
+        easyMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Easy));
+        mediumMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Medium));
+        hardMode.onClick.AddListener(() => SetGameDifficulty(Difficulty.Hard));
 
         // Set initial difficulty and update button colors
         SetDifficulty(gameDifficulty);
@@ -106,9 +107,9 @@ public class SpawnManager : MonoBehaviour
 
     void UpdateButtonColors()
     {
-        EasyMode.image.color = (gameDifficulty == Difficulty.Easy) ? selectedColor : defaultColor;
-        MediumMode.image.color = (gameDifficulty == Difficulty.Medium) ? selectedColor : defaultColor;
-        HardMode.image.color = (gameDifficulty == Difficulty.Hard) ? selectedColor : defaultColor;
+        easyMode.image.color = (gameDifficulty == Difficulty.Easy) ? selectedColor : defaultColor;
+        mediumMode.image.color = (gameDifficulty == Difficulty.Medium) ? selectedColor : defaultColor;
+        hardMode.image.color = (gameDifficulty == Difficulty.Hard) ? selectedColor : defaultColor;
     }
 
     // Method to spawn an enemy using object pooling

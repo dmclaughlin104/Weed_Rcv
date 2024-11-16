@@ -8,8 +8,6 @@ using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
-    // Player animator
-    //[SerializeField] Animator playerAnim;
 
     // UI elements
     [SerializeField] TextMeshProUGUI titleScreen;
@@ -21,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI gameOver2;
     [SerializeField] RawImage gameOverTint;
     [SerializeField] TextMeshProUGUI timerText;
+    public int enemiesKilledDuringPlay;
 
     // Variables
     private PlayerController playerControllerScript;
@@ -48,13 +47,26 @@ public class GameManager : MonoBehaviour
     {
 
         //KillWaveDebug();
-        // Activating UI gameplay timer
+
+        // Activating UI gameplay components
         if (spawnManagerScript.gameActive)
         {
             UpdateTimerUI();
+            HealthManager(playerControllerScript.healthCount);
+            gameOver1.gameObject.SetActive(false);
+            gameOver2.gameObject.SetActive(false);
+            spawnManagerScript.easyMode.gameObject.SetActive(false);
+            spawnManagerScript.mediumMode.gameObject.SetActive(false);
+            spawnManagerScript.hardMode.gameObject.SetActive(false);
         }
     }
 
+    void ChooseDifficultyUI()
+    {
+        spawnManagerScript.easyMode.gameObject.SetActive(true);
+        spawnManagerScript.mediumMode.gameObject.SetActive(true);
+        spawnManagerScript.hardMode.gameObject.SetActive(true);
+    }
 
     // Method to start game...
     void StartGame()
@@ -65,6 +77,7 @@ public class GameManager : MonoBehaviour
         // Telling spawn manager that game is active
         spawnManagerScript.gameActive = true;
 
+        healthText.gameObject.SetActive(true);
 
         /*
         // Additional UI and player state setup code (e.g., resetting health, UI elements, etc.)
@@ -73,7 +86,7 @@ public class GameManager : MonoBehaviour
         //playerAnim.SetBool("isDead", false);
         minuteCount = 0;
         secondsCount = 0;
-        healthText.gameObject.SetActive(true);
+
         waveText.gameObject.SetActive(true);
         timerText.gameObject.SetActive(true);
 
@@ -104,23 +117,22 @@ public class GameManager : MonoBehaviour
         // Stopping spawning by making game inactive
         spawnManagerScript.gameActive = false;
 
-        // Ensuring player stops running during Game Over screen
-        //playerAnim.SetFloat("vertical", 0);
-
-        // Assign final wave number
-        int gameOverWaveNumber = spawnManagerScript.nextWave;
-
         // Update game over UI
-        /*
-        gameOver2.text = "You reached" + "\n" + "wave " + gameOverWaveNumber + "\n in \n" +
-            minuteCount + " mins " + (int)secondsCount + " secs";
+
+        healthText.gameObject.SetActive(false);
+        timerText.gameObject.SetActive(false);
+
+        gameOver2.text = "You survived for " + minuteCount + " mins " + (int)secondsCount + " secs" +
+            "\n" + "and killed " + enemiesKilledDuringPlay + " enemies";
+            
         gameOver1.gameObject.SetActive(true);
         gameOver2.gameObject.SetActive(true);
-        gameOverTint.gameObject.SetActive(true);
-        */
+        //gameOverTint.gameObject.SetActive(true);
+        stopButton.gameObject.SetActive(false);
+        startButton.gameObject.SetActive(true);
 
         // Brief pause before start button appears
-        StartCoroutine(RestartButtonPause());
+        //StartCoroutine(RestartButtonPause());
         
         // Return all enemies to the pool instead of destroying them
         foreach (GameObject enemy in spawnManagerScript.activeEnemies)
@@ -167,6 +179,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //method to keep health text up to date
+    public void HealthManager(int pHealthNo)
+    {
+        if (playerControllerScript.healthCount > 0)
+        {
+            healthText.text = "Health: " + pHealthNo + "/3";
+        }
+        else
+        {
+            GameOverScreen();
+            ResetForNextPlay();
+        }
+    }
+
+
+
     // Debugging method to progress through waves (deactivating enemies instead of destroying them)
     void KillWaveDebug()
     {
@@ -179,18 +207,4 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    /*
-    // Flamethrower UI controller
-    void FlameThrowerUIActive()
-    {
-        flamethrowerBar.gameObject.SetActive(true);
-        flamethrowerText.gameObject.SetActive(true);
-    }
-
-    void FlameThrowerUINotActive()
-    {
-        flamethrowerBar.gameObject.SetActive(false);
-        flamethrowerText.gameObject.SetActive(false);
-    }
-    */
 }

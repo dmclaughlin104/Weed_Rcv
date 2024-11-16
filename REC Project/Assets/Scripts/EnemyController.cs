@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     public GameObject smokeParticle;
     public GameObject[] enemyBodyParts;
     public SpawnManager spawnManagerScript;
+    public GameManager gameManagerScript;
     private Transform player;
 
     // New variable for mouth position
@@ -28,6 +29,9 @@ public class EnemyController : MonoBehaviour
     private float minShootInterval = 5f;
     private float maxShootInterval = 10f;
     private float currentShootInterval; // Randomized interval for shooting
+    private float bulletSpeed;
+
+    private Coroutine releaseBulletCoroutine; // Track the ReleaseBullet coroutine
 
     private bool isPreparingToShoot = false; // Indicates if the enemy is preparing to shoot
 
@@ -40,6 +44,7 @@ public class EnemyController : MonoBehaviour
     {
         // Get SpawnManager component
         spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
         // Initialize other components
         enemyAnim = GetComponent<Animator>();
@@ -100,14 +105,17 @@ public class EnemyController : MonoBehaviour
         if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Easy)
         {
             movementSpeed = 1f; // slower speed for easy
+            bulletSpeed = 3f;
         }
         else if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Medium)
         {
             movementSpeed = 1.2f; // medium speed for medium difficulty
+            bulletSpeed = 6f;
         }
         else if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Hard)
         {
             movementSpeed = 1.75f; // fastest speed for hard
+            bulletSpeed = 9f;
         }
     }
 
@@ -135,7 +143,7 @@ public class EnemyController : MonoBehaviour
     IEnumerator ResumeMovementAfterShooting()
     {
         // Wait for the duration of the preparation
-        yield return new WaitForSeconds(2.25f);
+        yield return new WaitForSeconds(2.10f);
         this.enemyAnim.SetBool("isShooting", false);
         SetMovementSpeedByDifficulty();
         isPreparingToShoot = false;
@@ -145,7 +153,10 @@ public class EnemyController : MonoBehaviour
     {
 
         // Pause before releasing bullet
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.9f);
+
+        if (isDead) yield break; // Abort if the enemy has died
+
         GameObject bullet = EnemyBulletPool.Instance.GetBullet();
 
         if (bullet != null && player != null && mouthPoint != null)
@@ -163,7 +174,6 @@ public class EnemyController : MonoBehaviour
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             if (bulletRb != null)
             {
-                float bulletSpeed = 3f; // Adjust speed as needed
                 bulletRb.velocity = shootDirection * bulletSpeed;
             }
         }
@@ -182,7 +192,7 @@ public class EnemyController : MonoBehaviour
 
             //Coroutines to keep pace with "roar" animation
             StartCoroutine(ResumeMovementAfterShooting());
-            StartCoroutine(ReleaseBullet());
+            releaseBulletCoroutine = StartCoroutine(ReleaseBullet());
         }
 
     }
@@ -205,6 +215,7 @@ public class EnemyController : MonoBehaviour
     {
         if (other.CompareTag("Slash"))
         {
+            gameManagerScript.enemiesKilledDuringPlay++;
             EnemyDeath();
             enemyRB.AddForce(-moveDirection * attackForce, ForceMode.Impulse);
             StartCoroutine(ResetEnemyRB(1.5f));
@@ -240,6 +251,17 @@ public class EnemyController : MonoBehaviour
     void EnemyDeath()
     {
         isDead = true;
+
+        // Abort shooting process if in progress
+        if (releaseBulletCoroutine != null)
+        {
+            StopCoroutine(releaseBulletCoroutine);
+            releaseBulletCoroutine = null; // Clear reference
+        }
+
+        // Reset shooting state and animation
+        isPreparingToShoot = false;
+        this.enemyAnim.SetBool("isShooting", false);
         this.enemyAnim.SetBool("isDead", true);
         transform.gameObject.tag = "Dead Enemy";
     }
