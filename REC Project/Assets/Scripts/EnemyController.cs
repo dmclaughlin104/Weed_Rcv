@@ -29,6 +29,9 @@ public class EnemyController : MonoBehaviour
     private float maxShootInterval = 10f;
     private float currentShootInterval; // Randomized interval for shooting
 
+    private bool isPreparingToShoot = false; // Indicates if the enemy is preparing to shoot
+
+
     // Store original colors for each body part
     private Color[] originalColors;
 
@@ -59,21 +62,25 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Adjust enemy speed based on difficulty
         SetMovementSpeedByDifficulty();
 
         if (!isDead && spawnManagerScript.gameActive)
         {
             LookAtPlayer();
-            MoveTowardsPlayer();
 
-            // Check for shooting based on timer
+            if (!isPreparingToShoot)
+            {
+                MoveTowardsPlayer();
+            }
+
             shootTimer += Time.deltaTime;
-            if (shootTimer >= currentShootInterval)
+            if (shootTimer >= currentShootInterval && !isPreparingToShoot)
             {
                 ShootAtPlayer();
                 shootTimer = 0f; // Reset the timer
-                SetShootingIntervalByDifficulty(); // Set a new randomized interval
+
+                // Update the shooting interval
+                SetShootingIntervalByDifficulty();
             }
         }
 
@@ -104,7 +111,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    // Set shooting interval based on difficulty
     void SetShootingIntervalByDifficulty()
     {
         if (spawnManagerScript.gameDifficulty == SpawnManager.Difficulty.Easy)
@@ -125,36 +131,61 @@ public class EnemyController : MonoBehaviour
         currentShootInterval = Random.Range(minShootInterval, maxShootInterval);
     }
 
+
+    IEnumerator ResumeMovementAfterShooting()
+    {
+        // Wait for the duration of the preparation
+        yield return new WaitForSeconds(2.25f);
+        this.enemyAnim.SetBool("isShooting", false);
+        SetMovementSpeedByDifficulty();
+        isPreparingToShoot = false;
+    }
+
+    IEnumerator ReleaseBullet()
+    {
+
+        // Pause before releasing bullet
+        yield return new WaitForSeconds(2f);
+        GameObject bullet = EnemyBulletPool.Instance.GetBullet();
+
+        if (bullet != null && player != null && mouthPoint != null)
+        {
+            // Reset bullet position and activate it
+            bullet.transform.position = mouthPoint.position;
+            bullet.transform.rotation = Quaternion.identity;
+            bullet.SetActive(true);
+
+            // Calculate the target direction toward the player's head
+            Vector3 playerHeadPos = new Vector3(player.position.x, player.position.y + 1.5f, player.position.z);
+            Vector3 shootDirection = (playerHeadPos - mouthPoint.position).normalized;
+
+            // Set bullet velocity
+            Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+            if (bulletRb != null)
+            {
+                float bulletSpeed = 3f; // Adjust speed as needed
+                bulletRb.velocity = shootDirection * bulletSpeed;
+            }
+        }
+    }
+
     void ShootAtPlayer()
     {
         // Check with ShootingManager if this enemy can shoot
         if (EnemyShootingManager.Instance != null && EnemyShootingManager.Instance.RequestToShoot())
         {
-            GameObject bullet = EnemyBulletPool.Instance.GetBullet();
 
-            if (bullet != null && player != null && mouthPoint != null)
-            {
-                // Reset bullet position and activate it
-                bullet.transform.position = mouthPoint.position;
-                bullet.transform.rotation = Quaternion.identity;
-                bullet.SetActive(true);
+            // Stop movement and play the "roar" animation
+            isPreparingToShoot = true;
+            movementSpeed = 0f;
+            this.enemyAnim.SetBool("isShooting", true);
 
-                // Calculate the target direction toward the player's head
-                Vector3 playerHeadPos = new Vector3(player.position.x, player.position.y + 1.5f, player.position.z);
-                Vector3 shootDirection = (playerHeadPos - mouthPoint.position).normalized;
-
-                // Set bullet velocity
-                Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-                if (bulletRb != null)
-                {
-                    float bulletSpeed = 5f; // Adjust speed as needed
-                    bulletRb.velocity = shootDirection * bulletSpeed;
-                }
-            }
+            //Coroutines to keep pace with "roar" animation
+            StartCoroutine(ResumeMovementAfterShooting());
+            StartCoroutine(ReleaseBullet());
         }
+
     }
-
-
 
 
     void LookAtPlayer()
@@ -256,6 +287,7 @@ public class EnemyController : MonoBehaviour
         this.enemyAnim.SetBool("playerDead", false);
         this.enemyAnim.SetBool("bitePlayer", false);
         this.enemyAnim.SetBool("inZone", false);
+        this.enemyAnim.SetBool("isShooting", false);
         transform.gameObject.tag = "Weed Enemy";
         smokeParticle.SetActive(false);
 
