@@ -223,6 +223,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (other.CompareTag("Flames"))
         {
+            gameManagerScript.enemiesKilledDuringPlay++;
             StartCoroutine(SmokeDelay());
             EnemyDeath();
             ChangeWeedMaterialBlack();

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyTargetController : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    private float fixedHeight = 0.5f;
+    public float fixedHeight;
 
     // Start is called before the first frame update
     void Start()

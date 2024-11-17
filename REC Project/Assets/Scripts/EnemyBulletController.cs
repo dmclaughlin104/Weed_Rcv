@@ -1,14 +1,24 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class EnemyBulletController : MonoBehaviour
 {
     private float lifetime = 3f; // Lifetime before deactivation
     private float timer;
 
+    private PlayerController playerControllerScript;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        playerControllerScript = GameObject.Find("Enemy Target Point").GetComponent<PlayerController>();
+    }
+
     void OnEnable()
     {
         timer = 0f;
+
     }
 
     void Update()
@@ -26,8 +36,30 @@ public class EnemyBulletController : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Slash"))
+        {
+            DeactivateBullet();
 
-    private void DeactivateBullet()
+        }
+        else if (other.CompareTag("Flames"))
+        {
+            DeactivateBullet();
+        }
+        else if (other.CompareTag("PlayerHead"))
+        {
+            
+            playerControllerScript.healthCount--;
+            DeactivateBullet();
+            
+        }
+
+    }
+
+
+
+        private void DeactivateBullet()
     {
         // Deactivate instead of destroying
         gameObject.SetActive(false);
