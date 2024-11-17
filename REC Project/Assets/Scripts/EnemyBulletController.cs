@@ -47,7 +47,7 @@ public class EnemyBulletController : MonoBehaviour
         {
             DeactivateBullet();
         }
-        else if (other.CompareTag("PlayerHead"))
+        else if (other.CompareTag("Player"))
         {
             
             playerControllerScript.healthCount--;

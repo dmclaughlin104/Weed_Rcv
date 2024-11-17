@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     // Variables
     private PlayerController playerControllerScript;
+    private PostProcessingEffects postProcessingEffectsScript;
     private SpawnManager spawnManagerScript;
     private float secondsCount;
     private int minuteCount;
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
         // Finding scripts
         playerControllerScript = GameObject.Find("Enemy Target Point").GetComponent<PlayerController>();
         spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        postProcessingEffectsScript = GameObject.Find("Post Processing Controller").GetComponent<PostProcessingEffects>();
 
         // Adding listeners to buttons
         startButton.onClick.AddListener(DisplayDifficultyOptions);
@@ -70,10 +72,12 @@ public class GameManager : MonoBehaviour
 
     void InitializeUI()
     {
-        // Show only the start button initially
         startButton.gameObject.SetActive(true);
         stopButton.gameObject.SetActive(false);
         swapGunHandButton.gameObject.SetActive(true);
+
+        postProcessingEffectsScript.OnPlayerDeath();
+
 
         // Hide difficulty buttons and gameplay UI
         HideDifficultyUI();
@@ -90,6 +94,9 @@ public class GameManager : MonoBehaviour
         easyMode.gameObject.SetActive(true);
         mediumMode.gameObject.SetActive(true);
         hardMode.gameObject.SetActive(true);
+
+        postProcessingEffectsScript.OnGameRestart();
+
     }
 
     void SelectDifficulty(Difficulty difficulty)
@@ -106,6 +113,7 @@ public class GameManager : MonoBehaviour
     {
         //reset enemy kill count
         enemiesKilledDuringPlay = 0;
+        postProcessingEffectsScript.OnGameRestart();
 
         gameOver1.gameObject.SetActive(false);
         gameOver2.gameObject.SetActive(false);
@@ -177,6 +185,7 @@ public class GameManager : MonoBehaviour
     void GameOverScreen()
     {
         spawnManagerScript.gameActive = false;
+        postProcessingEffectsScript.OnPlayerDeath();
 
         // Update game over UI
         healthText.gameObject.SetActive(false);
