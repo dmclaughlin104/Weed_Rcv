@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 898161593603736771}
   - component: {fileID: 3943604725512707134}
   - component: {fileID: 3871111737356532149}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bullet
   m_TagString: Flames
   m_Icon: {fileID: 0}
@@ -142,9 +142,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1757125058325010793}
     m_Modifications:
+    - target: {fileID: 1866692896978666, guid: a990e3ac1318b834488c784d851f42a9, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1947871717301538, guid: a990e3ac1318b834488c784d851f42a9, type: 3}
       propertyPath: m_Name
       value: FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1947871717301538, guid: a990e3ac1318b834488c784d851f42a9, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4209731392266258, guid: a990e3ac1318b834488c784d851f42a9, type: 3}
       propertyPath: m_LocalScale.x

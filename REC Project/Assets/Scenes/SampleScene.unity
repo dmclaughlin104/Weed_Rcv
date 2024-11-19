@@ -985,7 +985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5117,7 +5117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1614194223}
-  fixedHeight: 0.5
+  fixedHeight: 0.35
 --- !u!65 &592750290
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6677,7 +6677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4706116037937865665, guid: 52c7d057cba585641bb68312c10d7791, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.0812104
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4706116037937865665, guid: 52c7d057cba585641bb68312c10d7791, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6714,10 +6714,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4617036660772024948, guid: 52c7d057cba585641bb68312c10d7791, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1485917582}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52c7d057cba585641bb68312c10d7791, type: 3}
 --- !u!1 &801205704
 GameObject:
@@ -10327,6 +10324,7 @@ GameObject:
   - component: {fileID: 1346796591}
   - component: {fileID: 1346796593}
   - component: {fileID: 1346796592}
+  - component: {fileID: 1346796594}
   m_Layer: 0
   m_Name: Warning Portal
   m_TagString: Untagged
@@ -10376,14 +10374,28 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.550627, y: 1.6591518, z: 5.0534625}
-  m_Center: {x: -0.011352038, y: -0.9847663, z: -0.006640093}
+  m_Size: {x: 6.501204, y: 0.16024485, z: 5.0534625}
+  m_Center: {x: -0.03606836, y: 0.4862351, z: -0.006640093}
+--- !u!114 &1346796594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346796590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb917b8cbb147745a3fc5d66e745cee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1614194223}
+  fixedHeight: 0.1
 --- !u!1001 &1349283353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12559,20 +12571,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4706116037937865665, guid: 52c7d057cba585641bb68312c10d7791, type: 3}
   m_PrefabInstance: {fileID: 800406282}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1485917582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485917578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eb917b8cbb147745a3fc5d66e745cee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1614194223}
-  fixedHeight: 0.1
 --- !u!1 &1495490345
 GameObject:
   m_ObjectHideFlags: 0
@@ -12799,6 +12797,9 @@ MonoBehaviour:
   gameManagerScript: {fileID: 0}
   mouthPoint: {fileID: 0}
   enemyBulletPrefab: {fileID: 0}
+  enemyAudioSource: {fileID: 0}
+  enemyAliveSounds: []
+  enemyDeathSounds: []
 --- !u!4 &1517998268
 Transform:
   m_ObjectHideFlags: 0

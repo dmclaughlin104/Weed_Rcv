@@ -12,8 +12,6 @@ public class EnemyController : MonoBehaviour
     public SpawnManager spawnManagerScript;
     public GameManager gameManagerScript;
     private Transform player;
-
-    // New variable for mouth position
     public Transform mouthPoint;
 
     // Movement variables
@@ -32,12 +30,16 @@ public class EnemyController : MonoBehaviour
     private float bulletSpeed;
 
     private Coroutine releaseBulletCoroutine; // Track the ReleaseBullet coroutine
-
     private bool isPreparingToShoot = false; // Indicates if the enemy is preparing to shoot
-
 
     // Store original colors for each body part
     private Color[] originalColors;
+
+    //audio functionality
+    [SerializeField] AudioSource enemyAudioSource;
+    [SerializeField] AudioClip[] enemyAliveSounds;
+    [SerializeField] AudioClip[] enemyDeathSounds;
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,10 @@ public class EnemyController : MonoBehaviour
         // Get SpawnManager component
         spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+        //getting audioSource
+        enemyAudioSource = GetComponent<AudioSource>();
+        enemyAudioSource.clip = enemyAliveSounds[0];
 
         // Initialize other components
         enemyAnim = GetComponent<Animator>();
@@ -64,10 +70,19 @@ public class EnemyController : MonoBehaviour
         currentShootInterval = Random.Range(minShootInterval, maxShootInterval);
     }
 
+    
+    private void OnEnable()
+    {
+        //TEST
+        PlayEnemyAliveSound();
+    }
+    
+
     // Update is called once per frame
     void Update()
     {
         SetMovementSpeedByDifficulty();
+
 
         if (!isDead && spawnManagerScript.gameActive)
         {
@@ -96,6 +111,21 @@ public class EnemyController : MonoBehaviour
             ResetEnemyRB();
             ResetEnemy();
         }
+    }
+
+    void PlayEnemyAliveSound()
+    {
+        int randomNum = Random.Range(0, 4);
+        enemyAudioSource.clip = enemyAliveSounds[randomNum];
+        enemyAudioSource.Play();
+    }
+
+    void playEnemyDeadSound()
+    {
+        int randomNum = Random.Range(0, 1);
+        enemyAudioSource.Stop();
+        //enemyAudioSource.clip = enemyDeathSounds[randomNum];
+        enemyAudioSource.PlayOneShot(enemyDeathSounds[randomNum]);
     }
 
 
@@ -220,8 +250,11 @@ public class EnemyController : MonoBehaviour
             enemyRB.AddForce(-moveDirection * attackForce, ForceMode.Impulse);
             StartCoroutine(ResetEnemyRB(1.5f));
             StartCoroutine(DeactivateEnemy(2f));
+
+            playEnemyDeadSound();
+
         }
-        else if (other.CompareTag("Flames"))
+        else if (other.CompareTag("Flames") && !isDead)
         {
             gameManagerScript.enemiesKilledDuringPlay++;
             StartCoroutine(SmokeDelay());
@@ -229,6 +262,9 @@ public class EnemyController : MonoBehaviour
             ChangeWeedMaterialBlack();
             StartCoroutine(DeactivateEnemy(4f));
             other.gameObject.SetActive(false);
+
+            playEnemyDeadSound();
+
         }
         else if (other.CompareTag("Player"))
         {

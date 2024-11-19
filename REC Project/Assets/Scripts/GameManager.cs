@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
         // Activating UI gameplay components
         if (spawnManagerScript.gameActive)
         {
+            postProcessingEffectsScript.OnGameRestart();
+
             UpdateTimerUI();
             HealthManager(playerControllerScript.healthCount);
             swapGunHandButton.gameObject.SetActive(true);
@@ -95,8 +97,6 @@ public class GameManager : MonoBehaviour
         easyMode.gameObject.SetActive(true);
         mediumMode.gameObject.SetActive(true);
         hardMode.gameObject.SetActive(true);
-
-        postProcessingEffectsScript.OnGameRestart();
 
     }
 
