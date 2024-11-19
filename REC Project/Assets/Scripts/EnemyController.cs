@@ -115,14 +115,14 @@ public class EnemyController : MonoBehaviour
 
     void PlayEnemyAliveSound()
     {
-        int randomNum = Random.Range(0, 4);
+        int randomNum = Random.Range(0, 5);
         enemyAudioSource.clip = enemyAliveSounds[randomNum];
         enemyAudioSource.Play();
     }
 
     void playEnemyDeadSound()
     {
-        int randomNum = Random.Range(0, 1);
+        int randomNum = Random.Range(0, 2);
         enemyAudioSource.Stop();
         //enemyAudioSource.clip = enemyDeathSounds[randomNum];
         enemyAudioSource.PlayOneShot(enemyDeathSounds[randomNum]);
@@ -243,7 +243,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Slash"))
+        if (other.CompareTag("Slash") && !isDead)
         {
             gameManagerScript.enemiesKilledDuringPlay++;
             EnemyDeath();

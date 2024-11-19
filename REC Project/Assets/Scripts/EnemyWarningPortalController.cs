@@ -5,12 +5,17 @@ using UnityEngine;
 public class EnemyWarningPortalController : MonoBehaviour
 {
 
+    [SerializeField] GameObject player;
+    private float warningDistance = 3f; // Distance to trigger the warning circle
     [SerializeField] private GameObject warningPortal;
+    private SpawnManager spawnManagerScript;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+
     }
 
     // Update is called once per frame

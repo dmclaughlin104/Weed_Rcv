@@ -8,10 +8,11 @@ public class SpawnManager : MonoBehaviour
     public GameObject player;
     public GameObject enemyPrefab;
     public GameObject powerUpPrefab;
+    [SerializeField] GameObject warningCircle; // Reference to the warning circle
     private float spawnRange = 8;
     public int enemyCount;
     public int nextWave;
-    [SerializeField] float playerSafetyZone = 7f;
+    [SerializeField] float playerSafetyZone = 4f;
 
     // Object pool variables
     private int initialPoolSize = 15; // Start with 15 enemies in the pool
@@ -38,6 +39,12 @@ public class SpawnManager : MonoBehaviour
             enemy.SetActive(false); // Initially set the enemy to inactive
             enemyPool.Add(enemy);
         }
+
+        // Ensure the warning circle is inactive at the start
+        if (warningCircle != null)
+        {
+            warningCircle.SetActive(false);
+        }
     }
 
     void Update()
@@ -56,6 +63,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
     }
+
 
     // Method to set the spawn interval and safety zone based on the selected difficulty level
     public void SetDifficultySettings(float interval, float safetyZone)
@@ -142,6 +150,4 @@ public class SpawnManager : MonoBehaviour
             enemyController.ResetEnemy();
         }
     }
-
-
 }

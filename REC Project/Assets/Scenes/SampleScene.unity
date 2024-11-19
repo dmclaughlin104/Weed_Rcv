@@ -985,7 +985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4431,9 +4431,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 773693c071a524745a04664e77f87acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 40008277}
+  player: {fileID: 1614194223}
   enemyPrefab: {fileID: 994612813390898335, guid: 972b29bf88f9d644fb7127271b2c7b88, type: 3}
   powerUpPrefab: {fileID: 6321442522542510879, guid: b5c9275377522b04eb64f633ec129592, type: 3}
+  warningCircle: {fileID: 1485917578}
   enemyCount: 0
   nextWave: 0
   playerSafetyZone: 7
@@ -10360,6 +10361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab503f9fc1d91e46bd425fc3fc398e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1614194223}
   warningPortal: {fileID: 1485917578}
 --- !u!65 &1346796593
 BoxCollider:
