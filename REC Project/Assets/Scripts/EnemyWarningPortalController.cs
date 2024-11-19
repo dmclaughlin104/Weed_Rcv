@@ -21,21 +21,36 @@ public class EnemyWarningPortalController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Check for nearby enemies and activate/deactivate the warning circle
+        CheckEnemyDistances();
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    // Method to check distances and activate/deactivate the warning circle
+    void CheckEnemyDistances()
     {
-        if (other.CompareTag("Weed Enemy"))
+        bool enemyNearby = false;
+
+        foreach (GameObject enemy in spawnManagerScript.activeEnemies)
         {
-            warningPortal.SetActive(true);
+            if (enemy.activeInHierarchy)
+            {
+                float distance = Vector3.Distance(player.transform.position, enemy.transform.position);
+                if (distance <= warningDistance)
+                {
+                    enemyNearby = true;
+                    break; // No need to check further
+                }
+            }
+        }
+
+        // Activate or deactivate the warning circle based on enemy proximity
+        if (warningPortal != null)
+        {
+            warningPortal.SetActive(enemyNearby);
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        warningPortal.SetActive(false);
-    }
+
 
 }

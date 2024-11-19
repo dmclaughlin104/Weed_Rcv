@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     public GameManager gameManagerScript;
     private Transform player;
     public Transform mouthPoint;
+    [SerializeField] GameObject playerHeadTarget;
 
     // Movement variables
     private float movementSpeed = 1f;
@@ -48,6 +49,9 @@ public class EnemyController : MonoBehaviour
         spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
+        //TEST
+        playerHeadTarget = GameObject.Find("Main Camera").gameObject;
+
         //getting audioSource
         enemyAudioSource = GetComponent<AudioSource>();
         enemyAudioSource.clip = enemyAliveSounds[0];
@@ -73,7 +77,6 @@ public class EnemyController : MonoBehaviour
     
     private void OnEnable()
     {
-        //TEST
         PlayEnemyAliveSound();
     }
     
@@ -197,7 +200,9 @@ public class EnemyController : MonoBehaviour
             bullet.SetActive(true);
 
             // Calculate the target direction toward the player's head
-            Vector3 playerHeadPos = new Vector3(player.position.x, player.position.y + 1.5f, player.position.z);
+            //Vector3 playerHeadPos = new Vector3(player.position.x, player.position.y + 1.5f, player.position.z);
+            Vector3 playerHeadPos = playerHeadTarget.transform.position;
+
             Vector3 shootDirection = (playerHeadPos - mouthPoint.position).normalized;
 
             // Set bullet velocity
