@@ -12,6 +12,7 @@ TagManager:
   - Dead Enemy
   - Slash
   - Flames
+  - Enemy Bullet
   layers:
   - Default
   - TransparentFX
