@@ -175,7 +175,7 @@ public class GunController : MonoBehaviour
         bullet.SetActive(false); // Return to pool
     }
 
-    // Update ammo bar
+    // Update ammo bars
     private void UpdateAmmoBar()
     {
         if (ammoBarLeft != null || ammoBarRight != null)

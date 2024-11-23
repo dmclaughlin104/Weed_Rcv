@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI gameOver1;
     [SerializeField] TextMeshProUGUI gameOver2;
     [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] GameObject warningPortal;
 
     //UI colours
     [SerializeField] private Color selectedColor = Color.green;
@@ -199,7 +198,6 @@ public class GameManager : MonoBehaviour
     {
         // Reset player health
         playerControllerScript.ResetHealth();
-        warningPortal.gameObject.SetActive(false);
 
         // Reset UI and gameplay variables
         minuteCount = 0;

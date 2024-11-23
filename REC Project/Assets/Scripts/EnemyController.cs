@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This script is applied to every individual enemy in the scene
+
 public class EnemyController : MonoBehaviour
 {
     // Object variables
@@ -20,18 +22,17 @@ public class EnemyController : MonoBehaviour
     private bool isDead = false;
     private float attackForce = 1.5f;
     Vector3 moveDirection;
-    private bool isJumping = false;
 
     // Shooting variables
-    public GameObject enemyBulletPrefab; // Reference to the bullet prefab
+    public GameObject enemyBulletPrefab;
     private float shootTimer = 0f; // Timer for shooting intervals
     private float minShootInterval = 5f;
     private float maxShootInterval = 10f;
-    private float currentShootInterval; // Randomized interval for shooting
+    private float currentShootInterval;
     private float bulletSpeed;
 
     private Coroutine releaseBulletCoroutine; // Track the ReleaseBullet coroutine
-    private bool isPreparingToShoot = false; // Indicates if the enemy is preparing to shoot
+    private bool isPreparingToShoot = false;
 
     // Store original colors for each body part
     private Color[] originalColors;
@@ -49,7 +50,7 @@ public class EnemyController : MonoBehaviour
         spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
-        //TEST
+        //getting player head target (i.e. the main camera)
         playerHeadTarget = GameObject.Find("Main Camera").gameObject;
 
         //getting audioSource
@@ -74,6 +75,7 @@ public class EnemyController : MonoBehaviour
         currentShootInterval = Random.Range(minShootInterval, maxShootInterval);
     }
 
+    //Start audio immediately upon enemy becoming active
     
     private void OnEnable()
     {
@@ -110,7 +112,7 @@ public class EnemyController : MonoBehaviour
         if (!spawnManagerScript.gameActive)
         {
             this.enemyAnim.SetBool("playerDead", true);
-            spawnManagerScript.DeactivateEnemy(gameObject);
+            spawnManagerScript.DeactivateEnemy(gameObject);//enemy calls method to from Spawn Manager to deactivate itself
             ResetEnemyRB();
             ResetEnemy();
         }
@@ -172,7 +174,7 @@ public class EnemyController : MonoBehaviour
         currentShootInterval = Random.Range(minShootInterval, maxShootInterval);
     }
 
-
+    //return to a normal state after firing bullet
     IEnumerator ResumeMovementAfterShooting()
     {
         // Wait for the duration of the preparation
@@ -182,9 +184,9 @@ public class EnemyController : MonoBehaviour
         isPreparingToShoot = false;
     }
 
+    //release bullet at player (in time with animation)
     IEnumerator ReleaseBullet()
     {
-
         // Pause before releasing bullet
         yield return new WaitForSeconds(1.9f);
 
@@ -200,7 +202,6 @@ public class EnemyController : MonoBehaviour
             bullet.SetActive(true);
 
             // Calculate the target direction toward the player's head
-            //Vector3 playerHeadPos = new Vector3(player.position.x, player.position.y + 1.5f, player.position.z);
             Vector3 playerHeadPos = playerHeadTarget.transform.position;
 
             Vector3 shootDirection = (playerHeadPos - mouthPoint.position).normalized;
@@ -214,9 +215,9 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    // Check with ShootingManager if this enemy can shoot
     void ShootAtPlayer()
     {
-        // Check with ShootingManager if this enemy can shoot
         if (EnemyShootingManager.Instance != null && EnemyShootingManager.Instance.RequestToShoot())
         {
 
@@ -232,7 +233,7 @@ public class EnemyController : MonoBehaviour
 
     }
 
-
+    //get player direction
     void LookAtPlayer()
     {
         Vector3 direction = (player.position - transform.position).normalized;
@@ -240,6 +241,7 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
+    
     void MoveTowardsPlayer()
     {
         moveDirection = (player.position - transform.position).normalized;
@@ -284,11 +286,6 @@ public class EnemyController : MonoBehaviour
         this.enemyAnim.SetBool("bitePlayer", false);
     }
 
-    IEnumerator JumpingCoolDown()
-    {
-        yield return new WaitForSeconds(1f);
-        isJumping = false;
-    }
 
     void EnemyDeath()
     {

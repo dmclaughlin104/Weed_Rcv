@@ -57,8 +57,6 @@ public class EnemyBulletController : MonoBehaviour
 
     }
 
-
-
         private void DeactivateBullet()
     {
         // Deactivate instead of destroying

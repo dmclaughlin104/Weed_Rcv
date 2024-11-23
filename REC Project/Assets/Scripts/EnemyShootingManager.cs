@@ -35,7 +35,7 @@ public class EnemyShootingManager : MonoBehaviour
         }
     }
 
-    // Method to check if an enemy can shoot
+    // Method to check if an enemy can shoot, i.e. whether enough time has passed
     public bool RequestToShoot()
     {
         if (canShoot)

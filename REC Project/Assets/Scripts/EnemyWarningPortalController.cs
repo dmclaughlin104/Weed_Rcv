@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Controls a 'warning portal' that turns on when enemies are near
+
 public class EnemyWarningPortalController : MonoBehaviour
 {
 

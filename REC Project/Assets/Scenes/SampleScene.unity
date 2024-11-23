@@ -480,9 +480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2c16ae51609eb4aa2a674e09d491e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAudio: {fileID: 0}
-  deathSound: {fileID: 8300000, guid: 33e356cd561f6284e8fcd2334e96db4d, type: 3}
-  flamethrowerSound: {fileID: 8300000, guid: 59398c670f438db4fa4fbc33dc0aca1a, type: 3}
   hasPowerUp: 0
   healthCount: 3
   maxHealth: 3
@@ -4057,6 +4054,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2024a45c81d048744a389504bfe81106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 0}
+  origColour:
+    r: 0
+    g: 0
+    b: 0
+    a: 0
+  flashTime: 0.25
 --- !u!136 &477164138
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5099,9 +5103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2c16ae51609eb4aa2a674e09d491e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAudio: {fileID: 0}
-  deathSound: {fileID: 0}
-  flamethrowerSound: {fileID: 0}
   hasPowerUp: 0
   healthCount: 3
   maxHealth: 3
@@ -7548,6 +7549,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 40008277}
+  cameraPosition: {x: 0, y: 0, z: 0}
+  yChange: -1
+  positionMultiplier: 5
 --- !u!82 &963194230
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8450,9 +8454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2c16ae51609eb4aa2a674e09d491e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAudio: {fileID: 0}
-  deathSound: {fileID: 0}
-  flamethrowerSound: {fileID: 0}
   hasPowerUp: 0
   healthCount: 3
   maxHealth: 3
