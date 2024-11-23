@@ -123,7 +123,7 @@ public class EnemyController : MonoBehaviour
         enemyAudioSource.Play();
     }
 
-    void playEnemyDeadSound()
+    void PlayEnemyDeadSound()
     {
         int randomNum = Random.Range(0, 2);
         enemyAudioSource.Stop();
@@ -256,7 +256,7 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(ResetEnemyRB(1.5f));
             StartCoroutine(DeactivateEnemy(2f));
 
-            playEnemyDeadSound();
+            PlayEnemyDeadSound();
 
         }
         else if (other.CompareTag("Flames") && !isDead)
@@ -268,7 +268,7 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(DeactivateEnemy(4f));
             other.gameObject.SetActive(false);
 
-            playEnemyDeadSound();
+            PlayEnemyDeadSound();
 
         }
         else if (other.CompareTag("Player"))

@@ -18,16 +18,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI gameOver1;
     [SerializeField] TextMeshProUGUI gameOver2;
-    //[SerializeField] RawImage gameOverTint;
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] GameObject warningPortal;
 
+    //UI colours
     [SerializeField] private Color selectedColor = Color.green;
     [SerializeField] private Color defaultColor = Color.white;
 
     public int enemiesKilledDuringPlay;
 
-    // Difficulty settings
+    // Game difficulty settings
     public enum Difficulty { Easy, Medium, Hard }
     public Difficulty gameDifficulty;
 
@@ -49,7 +49,6 @@ public class GameManager : MonoBehaviour
         // Adding listeners to buttons
         startButton.onClick.AddListener(DisplayDifficultyOptions);
         stopButton.onClick.AddListener(StopGame);
-
         easyMode.onClick.AddListener(() => SelectDifficulty(Difficulty.Easy));
         mediumMode.onClick.AddListener(() => SelectDifficulty(Difficulty.Medium));
         hardMode.onClick.AddListener(() => SelectDifficulty(Difficulty.Hard));
@@ -65,11 +64,9 @@ public class GameManager : MonoBehaviour
         if (spawnManagerScript.gameActive)
         {
             postProcessingEffectsScript.OnGameRestart();
-
             UpdateTimerUI();
             HealthManager(playerControllerScript.healthCount);
             swapGunHandButton.gameObject.SetActive(true);
-
         }
     }
 
@@ -78,15 +75,10 @@ public class GameManager : MonoBehaviour
         startButton.gameObject.SetActive(true);
         stopButton.gameObject.SetActive(false);
         swapGunHandButton.gameObject.SetActive(true);
-
-        postProcessingEffectsScript.OnPlayerDeath();
-
-
-        // Hide difficulty buttons and gameplay UI
-        HideDifficultyUI();
-
         healthText.gameObject.SetActive(false);
         timerText.gameObject.SetActive(false);
+        postProcessingEffectsScript.OnPlayerDeath();
+        HideDifficultyUI();
     }
 
     void DisplayDifficultyOptions()
@@ -114,7 +106,6 @@ public class GameManager : MonoBehaviour
     {
         //reset enemy kill count
         enemiesKilledDuringPlay = 0;
-        postProcessingEffectsScript.OnGameRestart();
 
         gameOver1.gameObject.SetActive(false);
         gameOver2.gameObject.SetActive(false);
@@ -136,12 +127,11 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //When Stop button is pressed:
     void StopGame()
     {
         spawnManagerScript.gameActive = false;
         ResetForNextPlay();
-
-        // UI adjustments
         stopButton.gameObject.SetActive(false);
         startButton.gameObject.SetActive(true);
     }
@@ -167,9 +157,9 @@ public class GameManager : MonoBehaviour
         UpdateButtonColors();
     }
 
+    // Highlight the currently selected difficulty button
     void UpdateButtonColors()
     {
-        // Highlight the selected difficulty button
         easyMode.image.color = (gameDifficulty == Difficulty.Easy) ? selectedColor : defaultColor;
         mediumMode.image.color = (gameDifficulty == Difficulty.Medium) ? selectedColor : defaultColor;
         hardMode.image.color = (gameDifficulty == Difficulty.Hard) ? selectedColor : defaultColor;
@@ -201,10 +191,10 @@ public class GameManager : MonoBehaviour
         stopButton.gameObject.SetActive(false);
         startButton.gameObject.SetActive(true);
 
-        // Clear variables for next run
         ResetForNextPlay();
     }
 
+    // Reset counters for next run
     void ResetForNextPlay()
     {
         // Reset player health
