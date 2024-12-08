@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     public GameObject[] enemyBodyParts;
     public SpawnManager spawnManagerScript;
     public GameManager gameManagerScript;
+    public AnimationToRagdoll ragdollScript;
     private Transform player;
     public Transform mouthPoint;
     [SerializeField] GameObject playerHeadTarget;
@@ -248,14 +249,14 @@ public class EnemyController : MonoBehaviour
         transform.Translate(moveDirection * movementSpeed * Time.deltaTime, Space.World);
     }
 
-    /*
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Slash") && !isDead)
         {
             gameManagerScript.enemiesKilledDuringPlay++;
             EnemyDeath();
-            enemyRB.AddForce(-moveDirection * attackForce, ForceMode.Impulse);
+            //enemyRB.AddForce(-moveDirection * attackForce, ForceMode.Impulse);
             StartCoroutine(ResetEnemyRB(1.5f));
             StartCoroutine(DeactivateEnemy(2f));
 
@@ -280,7 +281,7 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(BiteCoolDown());
         }
     }
-    */
+    
 
     IEnumerator BiteCoolDown()
     {
@@ -334,6 +335,7 @@ public class EnemyController : MonoBehaviour
     {
         enemyRB.velocity = Vector3.zero;
         enemyRB.angularVelocity = Vector3.zero;
+
     }
 
     IEnumerator ResetEnemyRB(float delay)

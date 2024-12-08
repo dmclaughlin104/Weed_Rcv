@@ -8,30 +8,97 @@ public class AnimationToRagdoll : MonoBehaviour
     [SerializeField] Collider myCollider;
     [SerializeField] Rigidbody[] rigidBodies;
 
+
+    private Dictionary<Transform, Vector3> originalPositions = new Dictionary<Transform, Vector3>();
+    private Dictionary<Transform, Quaternion> originalRotations = new Dictionary<Transform, Quaternion>();
+    private Transform[] bones;
+
+    private SwordVelocityManager velocityManager;
+
+
     // Start is called before the first frame update
     void Start()
     {
+
+        //get script
+        velocityManager = GameObject.Find("Left Stick").GetComponent<SwordVelocityManager>();
+
+        //get all rigid bodies
         rigidBodies = GetComponentsInChildren<Rigidbody>();
-        foreach (var rb in rigidBodies)
+
+        // Get all bones
+        bones = GetComponentsInChildren<Transform>();
+
+        foreach (var bone in bones)
         {
-            rb.isKinematic = true; // Initially disable physics
+            originalPositions[bone] = bone.localPosition;
+            originalRotations[bone] = bone.localRotation;
         }
+
+        ResetRigidBody();
+        EnableAnimator();
+
+    }
+
+    private void OnEnable()
+    {
+        ResetRigidBody();
+        EnableAnimator();
+        if (bones != null)
+        {
+            ResetBones();
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
+    public void ResetBones()
+    {
+        foreach (var bone in bones)
+        {
+            if (originalPositions.ContainsKey(bone))
+            {
+                bone.localPosition = originalPositions[bone];
+            }
+
+            if (originalRotations.ContainsKey(bone))
+            {
+                bone.localRotation = originalRotations[bone];
+            }
+        }
+    }
+
+
+    public void ResetRigidBody()
+    {
+        foreach (var rb in rigidBodies)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true; // Initially disable physics
+        }
+    }
+
+    public void EnableAnimator()
+    {
+        animator.enabled = true;
+    }
+
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Slash"))
         {
-            //Vector3 hitForce = other.attachedRigidbody.velocity * 10f; // Scale force
-            Debug.Log($"Triggered by: {other.name}, Rigidbody attached: {other.attachedRigidbody != null}");
+            //Debug.Log($"Triggered by: {other.name}, Rigidbody attached: {other.attachedRigidbody != null}");
 
-            Vector3 hitForce = other.attachedRigidbody.velocity * 100f; // Scale force
+
+
+            Vector3 hitForce = velocityManager.GetSwordVelocity() * 10f; // Scale force
             EnableRagdoll();
             ApplyForce(hitForce, other.transform.position);
         }
