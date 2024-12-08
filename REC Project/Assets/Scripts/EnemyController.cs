@@ -248,6 +248,7 @@ public class EnemyController : MonoBehaviour
         transform.Translate(moveDirection * movementSpeed * Time.deltaTime, Space.World);
     }
 
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Slash") && !isDead)
@@ -279,6 +280,7 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(BiteCoolDown());
         }
     }
+    */
 
     IEnumerator BiteCoolDown()
     {
