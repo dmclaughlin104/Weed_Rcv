@@ -41,18 +41,15 @@ public class EnemyBulletController : MonoBehaviour
         if (other.CompareTag("Slash"))
         {
             DeactivateBullet();
-
         }
         else if (other.CompareTag("Flames"))
         {
             DeactivateBullet();
         }
-        else if (other.CompareTag("Player"))
+        else if (other.CompareTag("Player") && playerControllerScript.damageBufferWait == false)
         {
-            
-            playerControllerScript.healthCount--;
+            playerControllerScript.HealthDamage();
             DeactivateBullet();
-            
         }
 
     }

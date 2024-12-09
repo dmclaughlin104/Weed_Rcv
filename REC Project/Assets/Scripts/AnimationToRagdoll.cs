@@ -98,7 +98,7 @@ public class AnimationToRagdoll : MonoBehaviour
 
 
 
-            Vector3 hitForce = velocityManager.GetSwordVelocity() * 10f; // Scale force
+            Vector3 hitForce = velocityManager.GetSwordVelocity() * 25f; // Scale force
             EnableRagdoll();
             ApplyForce(hitForce, other.transform.position);
         }

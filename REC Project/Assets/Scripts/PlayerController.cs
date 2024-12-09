@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
     //variables
     public bool hasPowerUp = false;
-    private bool damageBufferWait = false;
+    public bool damageBufferWait = false;
     public int healthCount = 3;
     public int maxHealth = 3;
     private float damageBufferTime = 2.5f;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     
 
     //method for depleting health
-    void HealthDamage()
+    public void HealthDamage()
     {
         healthCount--;
         damageBufferWait = true;
