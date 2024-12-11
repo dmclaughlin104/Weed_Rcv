@@ -524,10 +524,10 @@ PrefabInstance:
       addedObject: {fileID: 1792214004563540423}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 989227349147381204}
+      addedObject: {fileID: -6025405986212676725}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6025405986212676725}
+      addedObject: {fileID: 989227349147381204}
     - targetCorrespondingSourceObject: {fileID: 1082271958561512970, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6678078456876448837}
@@ -1585,6 +1585,23 @@ MonoBehaviour:
   enemyDeathSounds:
   - {fileID: 8300000, guid: f635c09167f1c4f4dae9751a41c8d9cc, type: 3}
   - {fileID: 8300000, guid: 12385c342a5434849877fd64d3ec580d, type: 3}
+--- !u!114 &-6025405986212676725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6098256933746829398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa4adbe29835fd843848175c0fc2942e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6417090729448921646}
+  myCollider: {fileID: 3794488286784792238}
+  rigidBodies: []
+  leftStickVelocityManager: {fileID: 0}
+  rightStickVelocityManager: {fileID: 0}
 --- !u!82 &989227349147381204
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1681,21 +1698,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-6025405986212676725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6098256933746829398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa4adbe29835fd843848175c0fc2942e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 6417090729448921646}
-  myCollider: {fileID: 3794488286784792238}
-  rigidBodies: []
 --- !u!1 &6297498006739159821 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}

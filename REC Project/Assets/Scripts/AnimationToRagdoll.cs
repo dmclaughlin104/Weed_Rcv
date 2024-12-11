@@ -8,23 +8,22 @@ public class AnimationToRagdoll : MonoBehaviour
     [SerializeField] Collider myCollider;
     [SerializeField] Rigidbody[] rigidBodies;
 
-
     private Dictionary<Transform, Vector3> originalPositions = new Dictionary<Transform, Vector3>();
     private Dictionary<Transform, Quaternion> originalRotations = new Dictionary<Transform, Quaternion>();
     private Transform[] bones;
+    private float velocityScaleForce = 1.5f;
 
     private SwordVelocityManager velocityManager;
-
+    private GunController gunControllerScript;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Get all rigid bodies
+        rigidBodies = GetComponentsInChildren<Rigidbody>();
 
         //get script
-        velocityManager = GameObject.Find("Left Stick").GetComponent<SwordVelocityManager>();
-
-        //get all rigid bodies
-        rigidBodies = GetComponentsInChildren<Rigidbody>();
+        gunControllerScript = GameObject.Find("Gun Controller").GetComponent<GunController>();
 
         // Get all bones
         bones = GetComponentsInChildren<Transform>();
@@ -37,7 +36,6 @@ public class AnimationToRagdoll : MonoBehaviour
 
         ResetRigidBody();
         EnableAnimator();
-
     }
 
     private void OnEnable()
@@ -48,13 +46,6 @@ public class AnimationToRagdoll : MonoBehaviour
         {
             ResetBones();
         }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void ResetBones()
@@ -73,7 +64,6 @@ public class AnimationToRagdoll : MonoBehaviour
         }
     }
 
-
     public void ResetRigidBody()
     {
         foreach (var rb in rigidBodies)
@@ -89,21 +79,33 @@ public class AnimationToRagdoll : MonoBehaviour
         animator.enabled = true;
     }
 
-
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Slash"))
         {
-            //Debug.Log($"Triggered by: {other.name}, Rigidbody attached: {other.attachedRigidbody != null}");
+            Rigidbody swordRb = other.attachedRigidbody;
 
-
-
-            Vector3 hitForce = velocityManager.GetSwordVelocity() * 25f; // Scale force
-            EnableRagdoll();
-            ApplyForce(hitForce, other.transform.position);
+            if (swordRb != null)
+            {
+                Vector3 hitForce = GetRelevantSwordVelocity();
+                EnableRagdoll();
+                ApplyForce(hitForce, other.transform.position);
+            }
         }
     }
 
+    //getting velocity hitforce from current hand/weapon orientation
+    private Vector3 GetRelevantSwordVelocity()
+    {
+        if (gunControllerScript.isRightHandActive)
+        {
+            velocityManager = GameObject.Find("Left Stick").GetComponent<SwordVelocityManager>();
+            return velocityManager.GetSwordVelocity() * velocityScaleForce;
+        }
+        else
+            velocityManager = GameObject.Find("Right Stick").GetComponent<SwordVelocityManager>();
+            return velocityManager.GetSwordVelocity() * velocityScaleForce; ;
+    }
 
     void EnableRagdoll()
     {
@@ -114,26 +116,18 @@ public class AnimationToRagdoll : MonoBehaviour
         }
     }
 
-
     void ApplyForce(Vector3 force, Vector3 hitPoint)
     {
-        Rigidbody closestRigidBody = null;
-        float closestDistance = float.MaxValue;
+        // Optionally add upward direction to make the ragdoll fall back more dramatically
+        Vector3 upwardForce = new Vector3(0, force.magnitude * 0.2f, 0);
+        Vector3 adjustedForce = force + upwardForce;
 
+        // Apply force to all rigidbodies in the ragdoll for a more natural movement
         foreach (var rb in rigidBodies)
         {
-            float distance = Vector3.Distance(rb.worldCenterOfMass, hitPoint);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestRigidBody = rb;
-            }
+            rb.AddForceAtPosition(adjustedForce, hitPoint, ForceMode.Impulse);
         }
 
-        if (closestRigidBody != null)
-        {
-            closestRigidBody.AddForceAtPosition(force, hitPoint, ForceMode.Impulse);
-        }
     }
 
 }

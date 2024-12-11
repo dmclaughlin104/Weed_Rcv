@@ -1723,8 +1723,9 @@ GameObject:
   - component: {fileID: 256051435}
   - component: {fileID: 256051434}
   - component: {fileID: 256051437}
+  - component: {fileID: 256051438}
   m_Layer: 7
-  m_Name: Stick
+  m_Name: Right Stick
   m_TagString: Slash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1843,6 +1844,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &256051438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256051432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0266fd5383002a446b309d0878ffdd83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &258158975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3444,6 +3457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasPowerUp: 0
+  damageBufferWait: 0
   healthCount: 3
   maxHealth: 3
 --- !u!114 &592750289
@@ -3553,7 +3567,6 @@ GameObject:
   - component: {fileID: 611970085}
   - component: {fileID: 611970084}
   - component: {fileID: 611970083}
-  - component: {fileID: 611970086}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -3609,35 +3622,6 @@ Transform:
   - {fileID: 810272508}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &611970086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611970082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01cd7c965a4055a4eb22a6db5bb787c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootButtonRight: {fileID: -2527800297701096747, guid: 0fec51e11a33a5f479ffa960cddc64f3, type: 3}
-  shootButtonLeft: {fileID: -849025678131493291, guid: 0fec51e11a33a5f479ffa960cddc64f3, type: 3}
-  bulletPrefab: {fileID: 4006123779515424504, guid: 59173eef3fecf9947a27f83677d264a1, type: 3}
-  spawnPointLeft: {fileID: 1862592472}
-  spawnPointRight: {fileID: 1655241291}
-  maxAmmo: 10
-  leftMele: {fileID: 937162050}
-  rightMele: {fileID: 256051432}
-  leftGun: {fileID: 1289186850}
-  rightGun: {fileID: 940928223}
-  rightControllerMesh: {fileID: 6363675131575184883}
-  leftControllerMesh: {fileID: 1092637661832894890}
-  swapGunHandButton: {fileID: 2127486410}
-  ammoBarLeft: {fileID: 2038716822}
-  ammoBarRight: {fileID: 1460346203}
-  leftArmCanvas: {fileID: 651462206}
-  rightArmCanvas: {fileID: 1608224319}
 --- !u!4 &632786992 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: d56dfd26ed8664782aad4a260be4c2b6, type: 3}
@@ -5991,12 +5975,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1073428729}
-  - component: {fileID: 1073428732}
   - component: {fileID: 1073428731}
   - component: {fileID: 1073428730}
   m_Layer: 0
   m_Name: Head Target Point
-  m_TagString: Player
+  m_TagString: Player Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6051,21 +6034,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1614194223}
   fixedHeight: 1.5
---- !u!114 &1073428732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073428728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e2c16ae51609eb4aa2a674e09d491e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasPowerUp: 0
-  healthCount: 3
-  maxHealth: 3
 --- !u!1 &1075182194
 GameObject:
   m_ObjectHideFlags: 0
@@ -10186,6 +10154,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4209731392266258, guid: a990e3ac1318b834488c784d851f42a9, type: 3}
   m_PrefabInstance: {fileID: 178293943}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1607572465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1607572467}
+  - component: {fileID: 1607572466}
+  m_Layer: 0
+  m_Name: Gun Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1607572466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607572465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01cd7c965a4055a4eb22a6db5bb787c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootButtonRight: {fileID: -2527800297701096747, guid: 0fec51e11a33a5f479ffa960cddc64f3, type: 3}
+  shootButtonLeft: {fileID: -849025678131493291, guid: 0fec51e11a33a5f479ffa960cddc64f3, type: 3}
+  bulletPrefab: {fileID: 4006123779515424504, guid: 59173eef3fecf9947a27f83677d264a1, type: 3}
+  spawnPointLeft: {fileID: 1862592472}
+  spawnPointRight: {fileID: 1655241291}
+  maxAmmo: 10
+  isRightHandActive: 1
+  leftMele: {fileID: 937162050}
+  rightMele: {fileID: 256051432}
+  leftGun: {fileID: 1289186850}
+  rightGun: {fileID: 940928223}
+  rightControllerMesh: {fileID: 6363675131575184883}
+  leftControllerMesh: {fileID: 1092637661832894890}
+  swapGunHandButton: {fileID: 2127486410}
+  ammoBarLeft: {fileID: 2038716822}
+  ammoBarRight: {fileID: 1460346203}
+  leftArmCanvas: {fileID: 651462206}
+  rightArmCanvas: {fileID: 1608224319}
+--- !u!4 &1607572467
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607572465}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.7893003, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1608224319
 GameObject:
   m_ObjectHideFlags: 0
@@ -13750,6 +13780,7 @@ BoxCollider:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1607572467}
   - {fileID: 494480046}
   - {fileID: 910627885}
   - {fileID: 852738419}

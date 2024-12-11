@@ -26,7 +26,7 @@ public class GunController : MonoBehaviour
     private int currentAmmo;
     private float ammoRegenCooldown = 1f;
     private List<GameObject> bulletPool;
-    private bool isRightHandActive = true;
+    public bool isRightHandActive = true;
 
     // Melee and Gun objects for swapping
     [SerializeField] GameObject leftMele;

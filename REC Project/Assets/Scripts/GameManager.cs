@@ -146,10 +146,10 @@ public class GameManager : MonoBehaviour
                 spawnManagerScript.SetDifficultySettings(3f, 7f);
                 break;
             case Difficulty.Medium:
-                spawnManagerScript.SetDifficultySettings(2f, 6f);
+                spawnManagerScript.SetDifficultySettings(2f, 5f);
                 break;
             case Difficulty.Hard:
-                spawnManagerScript.SetDifficultySettings(1.75f, 5.5f);
+                spawnManagerScript.SetDifficultySettings(1.75f, 4f);
                 break;
         }
 

@@ -30,11 +30,14 @@ public class PlayerController : MonoBehaviour
     //actions if triggers are activated
     private void OnTriggerEnter(Collider other)
     {
+        
         //if player is struck by enemy
         if (other.CompareTag("Weed Enemy") && damageBufferWait == false)
         {
             HealthDamage();
+            //UnityEngine.Debug.Log("Enemy Strike");
         }
+        
     }
     
 
@@ -44,7 +47,6 @@ public class PlayerController : MonoBehaviour
         healthCount--;
         damageBufferWait = true;
         StartCoroutine(DamageBufferCountdown());
-
     }
 
     //damage buffer method to limit the amount of health you can lose in a short period

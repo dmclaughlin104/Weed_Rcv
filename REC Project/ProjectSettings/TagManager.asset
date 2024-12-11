@@ -13,6 +13,7 @@ TagManager:
   - Slash
   - Flames
   - Enemy Bullet
+  - Player Head
   layers:
   - Default
   - TransparentFX
