@@ -25,6 +25,8 @@ public class SpawnManager : MonoBehaviour
     private float spawnInterval;
     private float spawnTimer = 0f;
 
+    //private int enemiesSpawnedCount; //DEBUG
+
     void Start()
     {
         // Initialize the enemy pool
@@ -121,6 +123,8 @@ public class SpawnManager : MonoBehaviour
             spawnPos = new Vector3(spawnPosX, objectYPosition, spawnPosZ);
         }
 
+        //enemiesSpawnedCount++;
+        //Debug.Log(spawnPos + " + " + enemiesSpawnedCount);
         return spawnPos;
     }
 

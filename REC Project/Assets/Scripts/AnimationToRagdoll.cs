@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class AnimationToRagdoll : MonoBehaviour
 {
-    [SerializeField] Animator animator;
+    [SerializeField] Animator enemyAnim;
     [SerializeField] Collider myCollider;
     [SerializeField] Rigidbody[] rigidBodies;
+
+    [SerializeField] float velocityThreshold = 15f; // Threshold to switch between animation and ragdoll death state
+    [SerializeField] float velocityScaleForce = 1.5f;
 
     private Dictionary<Transform, Vector3> originalPositions = new Dictionary<Transform, Vector3>();
     private Dictionary<Transform, Quaternion> originalRotations = new Dictionary<Transform, Quaternion>();
     private Transform[] bones;
-    private float velocityScaleForce = 1.5f;
 
     private SwordVelocityManager velocityManager;
     private GunController gunControllerScript;
 
-    // Start is called before the first frame update
     void Start()
     {
         // Get all rigid bodies
         rigidBodies = GetComponentsInChildren<Rigidbody>();
 
-        //get script
+        // Get controller script
         gunControllerScript = GameObject.Find("Gun Controller").GetComponent<GunController>();
 
         // Get all bones
         bones = GetComponentsInChildren<Transform>();
-
         foreach (var bone in bones)
         {
             originalPositions[bone] = bone.localPosition;
@@ -56,7 +56,6 @@ public class AnimationToRagdoll : MonoBehaviour
             {
                 bone.localPosition = originalPositions[bone];
             }
-
             if (originalRotations.ContainsKey(bone))
             {
                 bone.localRotation = originalRotations[bone];
@@ -76,25 +75,33 @@ public class AnimationToRagdoll : MonoBehaviour
 
     public void EnableAnimator()
     {
-        animator.enabled = true;
+        enemyAnim.enabled = true;
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Slash"))
         {
-            Rigidbody swordRb = other.attachedRigidbody;
+            Vector3 hitForce = GetRelevantSwordVelocity();
 
-            if (swordRb != null)
+            if (hitForce.magnitude >= velocityThreshold)
             {
-                Vector3 hitForce = GetRelevantSwordVelocity();
+                // High velocity: Ragdoll mode
                 EnableRagdoll();
                 ApplyForce(hitForce, other.transform.position);
             }
+            /*
+            else
+            {
+                // Low velocity: Animated fall
+                TriggerFallAnimation(hitForce);
+            }
+            */
         }
     }
 
-    //getting velocity hitforce from current hand/weapon orientation
+
+
     private Vector3 GetRelevantSwordVelocity()
     {
         if (gunControllerScript.isRightHandActive)
@@ -103,13 +110,15 @@ public class AnimationToRagdoll : MonoBehaviour
             return velocityManager.GetSwordVelocity() * velocityScaleForce;
         }
         else
+        {
             velocityManager = GameObject.Find("Right Stick").GetComponent<SwordVelocityManager>();
-            return velocityManager.GetSwordVelocity() * velocityScaleForce; ;
+            return velocityManager.GetSwordVelocity() * velocityScaleForce;
+        }
     }
 
     void EnableRagdoll()
     {
-        animator.enabled = false;
+        enemyAnim.enabled = false;
         foreach (var rb in rigidBodies)
         {
             rb.isKinematic = false; // Enable physics
@@ -118,16 +127,26 @@ public class AnimationToRagdoll : MonoBehaviour
 
     void ApplyForce(Vector3 force, Vector3 hitPoint)
     {
-        // Optionally add upward direction to make the ragdoll fall back more dramatically
         Vector3 upwardForce = new Vector3(0, force.magnitude * 0.2f, 0);
         Vector3 adjustedForce = force + upwardForce;
 
-        // Apply force to all rigidbodies in the ragdoll for a more natural movement
         foreach (var rb in rigidBodies)
         {
             rb.AddForceAtPosition(adjustedForce, hitPoint, ForceMode.Impulse);
         }
-
     }
 
+
+    void TriggerFallAnimation(Vector3 hitForce)
+    {
+        // Ensure the animator is enabled
+        EnableAnimator();
+
+        // Optionally rotate the enemy to simulate falling opposite the hit
+        Vector3 fallDirection = -hitForce.normalized;
+        Quaternion fallRotation = Quaternion.LookRotation(new Vector3(fallDirection.x, 0, fallDirection.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, fallRotation, 0.5f);
+
+        this.enemyAnim.SetBool("isDead", true);
+    }
 }

@@ -13,7 +13,6 @@ public class EnemyController : MonoBehaviour
     public GameObject[] enemyBodyParts;
     public SpawnManager spawnManagerScript;
     public GameManager gameManagerScript;
-    public AnimationToRagdoll ragdollScript;
     private Transform player;
     public Transform mouthPoint;
     [SerializeField] GameObject playerHeadTarget;
@@ -21,7 +20,7 @@ public class EnemyController : MonoBehaviour
     // Movement variables
     private float movementSpeed = 1f;
     private bool isDead = false;
-    private float attackForce = 1.5f;
+    private float attackForce = 3f;
     Vector3 moveDirection;
 
     // Shooting variables
@@ -130,7 +129,6 @@ public class EnemyController : MonoBehaviour
     {
         int randomNum = Random.Range(0, 2);
         enemyAudioSource.Stop();
-        //enemyAudioSource.clip = enemyDeathSounds[randomNum];
         enemyAudioSource.PlayOneShot(enemyDeathSounds[randomNum]);
     }
 
@@ -256,7 +254,7 @@ public class EnemyController : MonoBehaviour
         {
             gameManagerScript.enemiesKilledDuringPlay++;
             EnemyDeath();
-            //enemyRB.AddForce(-moveDirection * attackForce, ForceMode.Impulse);
+            enemyRB.AddForce(-moveDirection * attackForce, ForceMode.Impulse);
             StartCoroutine(ResetEnemyRB(1.5f));
             StartCoroutine(DeactivateEnemy(2f));
 

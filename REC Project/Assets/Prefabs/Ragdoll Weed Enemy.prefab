@@ -1571,7 +1571,6 @@ MonoBehaviour:
   - {fileID: 3007507020492917393}
   spawnManagerScript: {fileID: 0}
   gameManagerScript: {fileID: 0}
-  ragdollScript: {fileID: 0}
   mouthPoint: {fileID: 1757108272078060409}
   playerHeadTarget: {fileID: 0}
   enemyBulletPrefab: {fileID: 2054094540821667050, guid: 597f18397bab86b40997e90d37648f34, type: 3}
@@ -1597,11 +1596,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4adbe29835fd843848175c0fc2942e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 6417090729448921646}
+  enemyAnim: {fileID: 6417090729448921646}
   myCollider: {fileID: 3794488286784792238}
   rigidBodies: []
-  leftStickVelocityManager: {fileID: 0}
-  rightStickVelocityManager: {fileID: 0}
+  velocityThreshold: 5
+  velocityScaleForce: 1.5
 --- !u!82 &989227349147381204
 AudioSource:
   m_ObjectHideFlags: 0
