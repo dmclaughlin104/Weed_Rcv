@@ -78,6 +78,7 @@ public class AnimationToRagdoll : MonoBehaviour
         enemyAnim.enabled = true;
     }
 
+    
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Slash"))
@@ -93,12 +94,15 @@ public class AnimationToRagdoll : MonoBehaviour
             /*
             else
             {
-                // Low velocity: Animated fall
+                 Low velocity: Animated fall
                 TriggerFallAnimation(hitForce);
+                Debug.Log("Low Velocity Strike");
             }
             */
         }
     }
+
+
 
 
 

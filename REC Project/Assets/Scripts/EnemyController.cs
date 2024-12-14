@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
     // Movement variables
     private float movementSpeed = 1f;
     private bool isDead = false;
-    private float attackForce = 3f;
+    private float attackForce = 1.5f;
     Vector3 moveDirection;
 
     // Shooting variables
@@ -252,6 +252,7 @@ public class EnemyController : MonoBehaviour
     {
         if (other.CompareTag("Slash") && !isDead)
         {
+            //Debug.Log("ENEMYCONTROLLER SLASH");
             gameManagerScript.enemiesKilledDuringPlay++;
             EnemyDeath();
             enemyRB.AddForce(-moveDirection * attackForce, ForceMode.Impulse);
@@ -280,6 +281,11 @@ public class EnemyController : MonoBehaviour
         }
     }
     
+
+    public void AddForce()
+    {
+        enemyRB.AddForce(-moveDirection * attackForce, ForceMode.Impulse);
+    }
 
     IEnumerator BiteCoolDown()
     {
