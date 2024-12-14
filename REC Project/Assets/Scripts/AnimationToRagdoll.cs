@@ -8,8 +8,8 @@ public class AnimationToRagdoll : MonoBehaviour
     [SerializeField] Collider myCollider;
     [SerializeField] Rigidbody[] rigidBodies;
 
-    [SerializeField] float velocityThreshold = 15f; // Threshold to switch between animation and ragdoll death state
-    [SerializeField] float velocityScaleForce = 1.5f;
+    private float velocityThreshold = 10f; // Threshold to switch between animation and ragdoll death state
+    private float velocityScaleForce = 1.5f;
 
     private Dictionary<Transform, Vector3> originalPositions = new Dictionary<Transform, Vector3>();
     private Dictionary<Transform, Quaternion> originalRotations = new Dictionary<Transform, Quaternion>();
@@ -94,7 +94,7 @@ public class AnimationToRagdoll : MonoBehaviour
             /*
             else
             {
-                 Low velocity: Animated fall
+                //Low velocity: Animated fall
                 TriggerFallAnimation(hitForce);
                 Debug.Log("Low Velocity Strike");
             }

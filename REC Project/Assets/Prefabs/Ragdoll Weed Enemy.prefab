@@ -438,6 +438,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ae0fe5dd8367539458d9cb98f424accd, type: 2}
+    - target: {fileID: -2084811680363313996, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -1995150314605265975, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -445,6 +449,10 @@ PrefabInstance:
     - target: {fileID: -1018664272722485354, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       propertyPath: m_Name
       value: head
+      objectReference: {fileID: 0}
+    - target: {fileID: -751476226918971245, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       propertyPath: m_Name
@@ -1599,8 +1607,6 @@ MonoBehaviour:
   enemyAnim: {fileID: 6417090729448921646}
   myCollider: {fileID: 3794488286784792238}
   rigidBodies: []
-  velocityThreshold: 5
-  velocityScaleForce: 1.5
 --- !u!82 &989227349147381204
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2041,7 +2047,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -80
+    limit: -48.278923
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
