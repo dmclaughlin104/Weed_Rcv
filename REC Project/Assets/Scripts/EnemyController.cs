@@ -255,7 +255,7 @@ public class EnemyController : MonoBehaviour
             //Debug.Log("ENEMYCONTROLLER SLASH");
             gameManagerScript.enemiesKilledDuringPlay++;
             EnemyDeath();
-            enemyRB.AddForce(-moveDirection * attackForce, ForceMode.Impulse);
+            AddForce();
             StartCoroutine(ResetEnemyRB(1.5f));
             StartCoroutine(DeactivateEnemy(2f));
 

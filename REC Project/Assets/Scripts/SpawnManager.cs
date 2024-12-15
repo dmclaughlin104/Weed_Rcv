@@ -76,8 +76,8 @@ public class SpawnManager : MonoBehaviour
         if (enemy != null)
         {
             // Set the enemy active and move it to the spawn position
+            enemy.SetActive(true);//needs to be active to set new spawnPos
             enemy.transform.position = GenerateSpawnPos(0);
-            enemy.SetActive(true);
             activeEnemies.Add(enemy); // Add to the list of active enemies
         }
         else
