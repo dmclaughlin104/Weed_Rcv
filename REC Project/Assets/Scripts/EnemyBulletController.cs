@@ -48,17 +48,15 @@ public class EnemyBulletController : MonoBehaviour
         }
         else if (other.CompareTag("Player Head") && playerControllerScript.damageBufferWait == false)
         {
-            //playerControllerScript.healthCount--;
             playerControllerScript.HealthDamage();
             DeactivateBullet();
-            //Debug.Log("Bullet Strike");
         }
 
     }
 
-        private void DeactivateBullet()
-    {
         // Deactivate instead of destroying
+    private void DeactivateBullet()
+    {
         gameObject.SetActive(false);
     }
 }

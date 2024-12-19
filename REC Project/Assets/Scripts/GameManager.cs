@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     private PlayerController playerControllerScript;
     private PostProcessingEffects postProcessingEffectsScript;
     private SpawnManager spawnManagerScript;
+    private EnemyDifficultySettings enemyDifficultySettingsScript;
     private float secondsCount;
     private int minuteCount;
 
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
         playerControllerScript = GameObject.Find("Enemy Target Point").GetComponent<PlayerController>();
         spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         postProcessingEffectsScript = GameObject.Find("Post Processing Controller").GetComponent<PostProcessingEffects>();
+        enemyDifficultySettingsScript = GameObject.Find("Post Processing Controller").GetComponent<EnemyDifficultySettings>();
 
         // Adding listeners to buttons
         startButton.onClick.AddListener(DisplayDifficultyOptions);

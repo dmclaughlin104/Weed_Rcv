@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class SwordVelocityManager : MonoBehaviour
 {
-
+    //variables
     private Vector3 lastPosition;
     private Vector3 currentVelocity;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
 
     void Update()

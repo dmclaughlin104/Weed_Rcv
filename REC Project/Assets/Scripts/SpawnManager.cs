@@ -9,7 +9,6 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject powerUpPrefab;
     private float spawnRange = 8;
-    public int enemyCount;
     public int nextWave;
     [SerializeField] float playerSafetyZone = 4f;
 
@@ -45,8 +44,6 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
-        // Update the enemy count based on the number of active enemies
-        enemyCount = activeEnemies.Count;
 
         // If the game is active, continuously spawn enemies at set intervals
         if (gameActive)

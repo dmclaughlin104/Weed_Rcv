@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     public GameObject[] enemyBodyParts;
     public SpawnManager spawnManagerScript;
     public GameManager gameManagerScript;
+    private EnemyDifficultySettings enemyDifficultySettingsScript;
     private Transform player;
     public Transform mouthPoint;
     [SerializeField] GameObject playerHeadTarget;
@@ -49,6 +50,7 @@ public class EnemyController : MonoBehaviour
         // Get SpawnManager component
         spawnManagerScript = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
         gameManagerScript = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        enemyDifficultySettingsScript = GameObject.Find("Post Processing Controller").GetComponent<EnemyDifficultySettings>();
 
         //getting player head target (i.e. the main camera)
         playerHeadTarget = GameObject.Find("Main Camera").gameObject;
@@ -86,8 +88,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //I want to move this method from here in next iteration...
         SetMovementSpeedByDifficulty();
-
 
         if (!isDead && spawnManagerScript.gameActive)
         {
@@ -112,7 +114,7 @@ public class EnemyController : MonoBehaviour
         if (!spawnManagerScript.gameActive)
         {
             this.enemyAnim.SetBool("playerDead", true);
-            spawnManagerScript.DeactivateEnemy(gameObject);//enemy calls method to from Spawn Manager to deactivate itself
+            spawnManagerScript.DeactivateEnemy(gameObject);//enemy calls method from Spawn Manager to deactivate itself
             ResetEnemyRB();
             ResetEnemy();
         }
@@ -252,7 +254,6 @@ public class EnemyController : MonoBehaviour
     {
         if (other.CompareTag("Slash") && !isDead)
         {
-            //Debug.Log("ENEMYCONTROLLER SLASH");
             gameManagerScript.enemiesKilledDuringPlay++;
             EnemyDeath();
             AddForce();
@@ -331,7 +332,6 @@ public class EnemyController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         spawnManagerScript.DeactivateEnemy(gameObject);
-        spawnManagerScript.enemyCount--;
         ResetEnemy();
     }
 

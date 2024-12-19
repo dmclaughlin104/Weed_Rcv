@@ -532,16 +532,19 @@ PrefabInstance:
       addedObject: {fileID: 1792214004563540423}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6025405986212676725}
+      addedObject: {fileID: 989227349147381204}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 989227349147381204}
+      addedObject: {fileID: 8508459057592745075}
     - targetCorrespondingSourceObject: {fileID: 1082271958561512970, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6678078456876448837}
     - targetCorrespondingSourceObject: {fileID: 1082271958561512970, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4579849491323026438}
+    - targetCorrespondingSourceObject: {fileID: 1082271958561512970, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8828090618707027163}
     - targetCorrespondingSourceObject: {fileID: 3135921509060577837, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5226236751625837282}
@@ -551,6 +554,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3135921509060577837, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1660618517002130295}
+    - targetCorrespondingSourceObject: {fileID: 3135921509060577837, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3057686507789464350}
     - targetCorrespondingSourceObject: {fileID: -6170625038081293824, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 629334167119823385}
@@ -560,6 +566,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6170625038081293824, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4375099613308126510}
+    - targetCorrespondingSourceObject: {fileID: -6170625038081293824, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6975954196165365147}
     - targetCorrespondingSourceObject: {fileID: -2084811680363313996, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6482385567785053238}
@@ -578,6 +587,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -3086436065929644917, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 627897167771585749}
+    - targetCorrespondingSourceObject: {fileID: -3086436065929644917, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5404664648746868903}
     - targetCorrespondingSourceObject: {fileID: -4332706925441422008, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2139865311994403985}
@@ -587,6 +599,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -4332706925441422008, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6842523921711642587}
+    - targetCorrespondingSourceObject: {fileID: -4332706925441422008, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1029090160694010948}
     - targetCorrespondingSourceObject: {fileID: -751476226918971245, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 232427038115834253}
@@ -605,6 +620,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -203856693384778745, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3599497537571554815}
+    - targetCorrespondingSourceObject: {fileID: -203856693384778745, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8003874828845025592}
     - targetCorrespondingSourceObject: {fileID: 8817898888258712963, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5016891240113198322}
@@ -614,6 +632,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8817898888258712963, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1789604279127647408}
+    - targetCorrespondingSourceObject: {fileID: 8817898888258712963, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2944622501463693201}
     - targetCorrespondingSourceObject: {fileID: 3948933247560734027, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7205166062170044011}
@@ -623,6 +644,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3948933247560734027, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8405653781721459269}
+    - targetCorrespondingSourceObject: {fileID: 3948933247560734027, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1479153646454862502}
     - targetCorrespondingSourceObject: {fileID: -9070493210130169274, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7297247679865679342}
@@ -632,6 +656,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -9070493210130169274, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7234471825746264116}
+    - targetCorrespondingSourceObject: {fileID: -9070493210130169274, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4688871729544491417}
     - targetCorrespondingSourceObject: {fileID: -290750445479886849, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7326167374182573332}
@@ -641,6 +668,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -290750445479886849, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4595717135326419787}
+    - targetCorrespondingSourceObject: {fileID: -290750445479886849, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1913516695799664578}
     - targetCorrespondingSourceObject: {fileID: -1018664272722485354, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5424290015203177530}
@@ -650,6 +680,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -1018664272722485354, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1497155372896371623}
+    - targetCorrespondingSourceObject: {fileID: -1018664272722485354, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1764930527807990168}
   m_SourcePrefab: {fileID: 100100000, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
 --- !u!1 &753060164290482296 stripped
 GameObject:
@@ -735,7 +768,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -20
+    limit: -62.070465
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
@@ -753,7 +786,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -762,6 +795,20 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &5404664648746868903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957845390412538252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96b619fad2815345ab7156a3b52c800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRigidbody: {fileID: 1032236146881630535}
+  ragdollController: {fileID: 0}
 --- !u!1 &1093197028185893326 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2932998491564163895, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
@@ -859,7 +906,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -868,6 +915,20 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &1029090160694010948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999342663064074319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96b619fad2815345ab7156a3b52c800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRigidbody: {fileID: 3922336132333404760}
+  ragdollController: {fileID: 0}
 --- !u!1 &2467776741985165444 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8817898888258712963, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
@@ -960,7 +1021,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -969,6 +1030,20 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2944622501463693201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2467776741985165444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96b619fad2815345ab7156a3b52c800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRigidbody: {fileID: 2493603612569328690}
+  ragdollController: {fileID: 0}
 --- !u!1 &2564581787542334200 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -290750445479886849, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
@@ -1061,7 +1136,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -1070,6 +1145,20 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &1913516695799664578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2564581787542334200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96b619fad2815345ab7156a3b52c800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRigidbody: {fileID: 5809401062043697689}
+  ragdollController: {fileID: 0}
 --- !u!1 &2687510863630383360 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -203856693384778745, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
@@ -1160,7 +1249,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -1169,6 +1258,20 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &8003874828845025592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2687510863630383360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96b619fad2815345ab7156a3b52c800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRigidbody: {fileID: 7155997491233743333}
+  ragdollController: {fileID: 0}
 --- !u!1 &3007507020492917393 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1018664272722485354, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
@@ -1268,6 +1371,20 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &1764930527807990168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3007507020492917393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96b619fad2815345ab7156a3b52c800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRigidbody: {fileID: 3411629439940095537}
+  ragdollController: {fileID: 0}
 --- !u!1 &3310723882610056596 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -751476226918971245, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
@@ -1592,21 +1709,6 @@ MonoBehaviour:
   enemyDeathSounds:
   - {fileID: 8300000, guid: f635c09167f1c4f4dae9751a41c8d9cc, type: 3}
   - {fileID: 8300000, guid: 12385c342a5434849877fd64d3ec580d, type: 3}
---- !u!114 &-6025405986212676725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6098256933746829398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa4adbe29835fd843848175c0fc2942e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyAnim: {fileID: 6417090729448921646}
-  myCollider: {fileID: 3794488286784792238}
-  rigidBodies: []
 --- !u!82 &989227349147381204
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1703,6 +1805,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8508459057592745075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6098256933746829398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa4adbe29835fd843848175c0fc2942e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAnim: {fileID: 6417090729448921646}
+  myCollider: {fileID: 3794488286784792238}
+  rigidBodies: []
 --- !u!1 &6297498006739159821 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
@@ -1756,6 +1873,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8828090618707027163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6297498006739159821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96b619fad2815345ab7156a3b52c800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRigidbody: {fileID: 4579849491323026438}
+  ragdollController: {fileID: 0}
 --- !u!1 &6520957127725324097 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -9070493210130169274, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
@@ -1848,7 +1979,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -1857,6 +1988,20 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &4688871729544491417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6520957127725324097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96b619fad2815345ab7156a3b52c800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRigidbody: {fileID: 660080912241707308}
+  ragdollController: {fileID: 0}
 --- !u!4 &6911491556003984108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
@@ -1964,7 +2109,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -1973,6 +2118,20 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &1479153646454862502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7975127629446611020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96b619fad2815345ab7156a3b52c800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRigidbody: {fileID: 2766048117050904061}
+  ragdollController: {fileID: 0}
 --- !u!1 &8231943185015723783 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6170625038081293824, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
@@ -2065,7 +2224,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -2074,6 +2233,20 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &6975954196165365147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8231943185015723783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96b619fad2815345ab7156a3b52c800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRigidbody: {fileID: 2608152974997487567}
+  ragdollController: {fileID: 0}
 --- !u!1 &8351136547325075242 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3135921509060577837, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}
@@ -2148,7 +2321,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: -20
+    limit: -64.65558
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
@@ -2166,7 +2339,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -2175,6 +2348,20 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &3057686507789464350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8351136547325075242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96b619fad2815345ab7156a3b52c800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneRigidbody: {fileID: 331206424068358115}
+  ragdollController: {fileID: 0}
 --- !u!1 &8858236679831466513 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6733177361254619370, guid: 8d2c18a25e3406c43968a2b7cd3acf2a, type: 3}

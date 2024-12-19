@@ -19,7 +19,7 @@ public class GunController : MonoBehaviour
     private float shootForce = 1000f;
     private float bulletRemainTime = 3.0f;
     private float secondsBetweenShoot = 0.2f;
-    private float trackshoot;
+    private float trackShootingTime;
 
     // Ammo and pool settings
     [SerializeField] int maxAmmo = 10;
@@ -59,7 +59,7 @@ public class GunController : MonoBehaviour
 
     void Update()
     {
-        trackshoot -= Time.deltaTime;
+        trackShootingTime -= Time.deltaTime;
         Shoot(activeShootButton, activeBulletSpawn);
 
     }
@@ -79,7 +79,7 @@ public class GunController : MonoBehaviour
     // Shoot if ammo is available and cooldown has elapsed
     void Shoot(InputActionReference activeShoot, Transform activePosition)
     {
-        if (activeShoot.action.ReadValue<float>() == 1 && trackshoot <= 0 && currentAmmo > 0)
+        if (activeShoot.action.ReadValue<float>() == 1 && trackShootingTime <= 0 && currentAmmo > 0)
         {
             GameObject bullet = GetBulletFromPool();
             if (bullet != null)
@@ -95,7 +95,7 @@ public class GunController : MonoBehaviour
 
                 currentAmmo--;
                 UpdateAmmoBar();
-                trackshoot = secondsBetweenShoot;
+                trackShootingTime = secondsBetweenShoot;
 
                 // Start the lifetime countdown
                 StartCoroutine(LifetimeCountdown(bullet));
